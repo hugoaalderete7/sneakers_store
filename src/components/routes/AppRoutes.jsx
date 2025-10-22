@@ -6,6 +6,7 @@ import RegisterPage from '../../pages/register_page/RegisterPage';
 import AdminUsersPage from '../../pages/admin_users_page/AdminUsersPage';
 import LoginPage from '../../pages/login_page/LoginPage';
 import Navbar from '../navbar/Navbar';
+import ProductsPage from '../../pages/products_page/ProductsPage';
 
 const AppRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/admin-users" element={<AdminUsersPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/products" element={<ProductsPage />} />
 
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
