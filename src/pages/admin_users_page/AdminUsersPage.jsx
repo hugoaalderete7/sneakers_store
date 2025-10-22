@@ -5,6 +5,8 @@ import { readUsers } from '../../store/slices/users/usersThunks';
 const AdminUsersPage = () => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users);
+    const user = useSelector(state => state.auth.user);
+    console.log("Usuario en AdminUsersPage:", user);
 
     async function fetchUsers() {
         dispatch(readUsers());

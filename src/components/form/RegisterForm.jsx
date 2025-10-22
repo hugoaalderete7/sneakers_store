@@ -13,7 +13,6 @@ const RegisterForm = () => {
     const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleBlurRegister } = UseForm();
     const dispatch = useDispatch();
 
-
     // useEffect(() => {
     //     if (dataToEdit) {
     //         setForm(dataToEdit)
@@ -21,6 +20,7 @@ const RegisterForm = () => {
     //         setForm(initialForm)
     //     }
     // }, [dataToEdit])
+
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -31,11 +31,7 @@ const RegisterForm = () => {
 
             // if (!form._id) {
             if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
-                // const response = await axios.post("http://localhost:4000/api/users", form);
-                // console.log(response);
                 dispatch(createUser(form));
-                
-                
                 alert("Te registraste con éxito, Inicia Sesion y podras realizar tus compras!!!");
                 setForm(initialForm);
                 setErrors(initialErrors);
@@ -46,16 +42,11 @@ const RegisterForm = () => {
             // } else {
             //     UpDateUsers(form);
             // }
-            console.log(form);
-            console.log(errors);
-
         } catch (error) {
             console.log(error);
-            // alert(error.response.data);
             setForm(initialForm);
         }
     }
-
 
     return (
         <div className='form-container'>
@@ -111,10 +102,9 @@ const RegisterForm = () => {
                     value={form.password || ""}
                 />
                 {errors.password && <p style={styles}>{errors.password}</p>}
-                
-                <button className="button-login-register" onClick={(e) => handleSubmit(e)}>Enviar</button>
-            </form>
 
+                <button type="button" className="button-login-register" onClick={(e) => handleSubmit(e)}>Enviar</button>
+            </form>
         </div>
     );
 }

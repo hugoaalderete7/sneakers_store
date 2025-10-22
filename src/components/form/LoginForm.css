@@ -1,0 +1,38 @@
+.form-container{
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input-login-register {
+    padding: 0.5rem;
+    margin-top: 1.25rem;
+    background: transparent;
+    font-weight: bold;
+    border: none;
+    border-bottom: solid 2px red;
+    color: #000;
+    font-size: medium;
+}
+
+.h2-login-register {
+    color: #000;
+    text-align: center;
+}
+
+.button-login-register {
+    width: 100%;
+    padding: 0.5rem;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 2rem;
+    background: grey;
+    font-weight: bold;
+    color: #000;
+    font-size: large;
+    border: solid 3px grey;
+}
