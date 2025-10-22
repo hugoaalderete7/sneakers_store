@@ -68,6 +68,50 @@ const UseForm = () => {
     }
 
 
+    const validationFormProducts = (formProducts) => {
+
+        let errorsProducts = {};
+
+        let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+        let regexComments = /^.{1,20}$/;
+        let regexComments1 = /^.{1,3}$/;
+        let regexComments2 = /^.{5,6}$/;
+        let regexNumber = /^[0-9]*$/;
+
+
+        if (!formProducts.name.trim()) {
+            errorsProducts.name = 'El campo "Nombre" es requerido'
+        } else if (!regexName.test(formProducts.name.trim())) {
+            errorsProducts.name = 'El campo "Nombre" solo acepta letras y espacios en blanco'
+        } else if (!regexComments.test(formProducts.name.trim())) {
+            errorsProducts.name = 'El campo "Nombre" no debe tener mas de 20 caracteres'
+        } else
+
+            if (!formProducts.cantIngr.trim()) {
+                errorsProducts.cantIngr = 'El campo "CantIngr" es requerido';
+            } else if (!regexNumber.test(formProducts.cantIngr.trim())) {
+                errorsProducts.cantIngr = 'El campo "CantIngr" debe ser un numero'
+            } else if (!regexComments1.test(formProducts.cantIngr.trim())) {
+                errorsProducts.cantIngr = 'El campo "CantIngr" solo admite hasta 3 caracteres'
+            } else
+
+                if (!formProducts.price.trim()) {
+                    errorsProducts.price = 'El campo "Precio" es requerido';
+                } else if (!regexNumber.test(formProducts.price.trim())) {
+                    errorsProducts.price = 'El campo "Precio" debe ser un numero'
+                } else if (!regexComments2.test(formProducts.cantIngr.trim())) {
+                    errorsProducts.price = 'El campo "Precio" solo admite 5 o 6 caracteres'
+                } else
+
+                    if (!formProducts.image.trim()) {
+                        errorsProducts.image = 'El campo "Imagen" es requerido';
+                    } else
+
+
+                        return errorsProducts;
+    }
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
