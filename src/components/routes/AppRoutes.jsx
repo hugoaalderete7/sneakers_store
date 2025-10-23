@@ -7,6 +7,7 @@ import AdminUsersPage from '../../pages/admin_users_page/AdminUsersPage';
 import LoginPage from '../../pages/login_page/LoginPage';
 import Navbar from '../navbar/Navbar';
 import ProductsPage from '../../pages/products_page/ProductsPage';
+import AdminProductsPage from '../../pages/admin_products_page/AdminProductsPage';
 
 const AppRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/admin-users" element={<AdminUsersPage />} />
+                <Route path="/admin-products" element={<AdminProductsPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/products" element={<ProductsPage />} />
 

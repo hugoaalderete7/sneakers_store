@@ -26,6 +26,7 @@ const Navbar = () => {
                 <NavLink to="/login" className={({isActive})=> isActive ? "active" : "" }>Inicia Sesión</NavLink>
             }
             <NavLink to="/admin-users" className={({isActive})=> isActive ? "active" : "" }>Admin_Users</NavLink>
+            <NavLink to="/admin-products" className={({isActive})=> isActive ? "active" : "" }>Admin_Products</NavLink>
         </nav>
     );
 }

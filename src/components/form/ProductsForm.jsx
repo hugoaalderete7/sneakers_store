@@ -10,8 +10,8 @@ let styles = {
     color: "#dc3545"
 }
 
-const RegisterForm = () => {
-    const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleBlurRegister } = UseForm();
+const ProductsForm = () => {
+    const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleChecked, handleBlurProducts } = UseForm();
     const dispatch = useDispatch();
 
     // useEffect(() => {
@@ -63,12 +63,12 @@ const RegisterForm = () => {
                         name='name'
                         type='text'
                         placeholder='Nombre del Producto'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.name}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.name || ""}
                     />
 
-                    {errorsProducts.name && <p style={styles}>{errorsProducts.name}</p>}
+                    {errors.name && <p style={styles}>{errors.name}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -76,16 +76,16 @@ const RegisterForm = () => {
                     <select
                         className='products-select'
                         name='sex'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.sex}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.sex || ''}
                     >
                         <option value="">---</option>
                         <option value="men">Hombre</option>
                         <option value="women">Mujer</option>
                     </select>
 
-                    {errorsProducts.sex && <p style={styles}>{errorsProducts.sex}</p>}
+                    {errors.sex && <p style={styles}>{errors.sex}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -93,9 +93,9 @@ const RegisterForm = () => {
                     <select
                         className='products-select'
                         name='brand'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.brand}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.brand || ''}
                     >
                         <option value="">---</option>
                         <option value="adidas">Adidas</option>
@@ -104,7 +104,7 @@ const RegisterForm = () => {
                         <option value="puma">Puma</option>
                     </select>
 
-                    {errorsProducts.brand && <p style={styles}>{errorsProducts.brand}</p>}
+                    {errors.brand && <p style={styles}>{errors.brand}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -112,9 +112,9 @@ const RegisterForm = () => {
                     <select
                         className='products-select'
                         name='sport'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.sport}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.sport || ''}
                     >
                         <option value="">---</option>
                         <option value="running">Running</option>
@@ -122,7 +122,7 @@ const RegisterForm = () => {
                         <option value="trainning">Trainning</option>
                     </select>
 
-                    {errorsProducts.sport && <p style={styles}>{errorsProducts.sport}</p>}
+                    {errors.sport && <p style={styles}>{errors.sport}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -130,9 +130,9 @@ const RegisterForm = () => {
                     <select
                         className='products-select'
                         name='size'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.size}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.size || ''}
                     >
                         <option value="">---</option>
                         <option value="37">37</option>
@@ -143,7 +143,7 @@ const RegisterForm = () => {
                         <option value="42">42</option>
                     </select>
 
-                    {errorsProducts.size && <p style={styles}>{errorsProducts.size}</p>}
+                    {errors.size && <p style={styles}>{errors.size}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -151,9 +151,9 @@ const RegisterForm = () => {
                     <select
                         className='products-select'
                         name='color'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.color}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.color || ''}
                     >
                         <option value="">---</option>
                         <option value="blanco">Blanco</option>
@@ -166,7 +166,7 @@ const RegisterForm = () => {
                         <option value="combinado">Combinado</option>
                     </select>
 
-                    {errorsProducts.color && <p style={styles}>{errorsProducts.color}</p>}
+                    {errors.color && <p style={styles}>{errors.color}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -176,12 +176,12 @@ const RegisterForm = () => {
                         name='cantIngr'
                         type='number'
                         placeholder='Cantidad'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.cantIngr}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.cantIngr || ''}
                     />
 
-                    {errorsProducts.cantIngr && <p style={styles}>{errorsProducts.cantIngr}</p>}
+                    {errors.cantIngr && <p style={styles}>{errors.cantIngr}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -191,12 +191,12 @@ const RegisterForm = () => {
                         name='price'
                         type='number'
                         placeholder='Precio'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.price}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.price || ''}
                     />
 
-                    {errorsProducts.price && <p style={styles}>{errorsProducts.price}</p>}
+                    {errors.price && <p style={styles}>{errors.price}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -206,12 +206,12 @@ const RegisterForm = () => {
                         name='image'
                         type='text'
                         placeholder='Imagen del Producto'
-                        onChange={handleChangeProducts}
-                        // onBlur={handleBlurProducts}
-                        value={formProducts.image}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.image || ''}
                     />
 
-                    {errorsProducts.image && <p style={styles}>{errorsProducts.image}</p>}
+                    {errors.image && <p style={styles}>{errors.image}</p>}
                 </section>
 
                 <section className='products-check-label-input  products-section-grid-item'>
@@ -222,13 +222,13 @@ const RegisterForm = () => {
                         id='myCheckbox'
                         type='checkbox'
                         onChange={handleChecked}
-                        value={formProducts.published}
-                    // onBlur={handleBlurProducts}
+                        value={form.published || false}
+                        onBlur={handleBlurProducts}
                     />
                 </section>
 
                 <section className='products-section-grid-item'>
-                    <button className="products-form-button" onClick={handleSubmitProducts}>Ingresar</button>
+                    <button className="products-form-button" onClick={handleSubmit}>Ingresar</button>
                 </section>
 
             </form>
@@ -236,4 +236,4 @@ const RegisterForm = () => {
     );
 }
 
-export default RegisterForm;
+export default ProductsForm;
