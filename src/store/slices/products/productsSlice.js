@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createProduct, readProducts } from "./productsThunks";
+import { createProduct, readProducts, readProduct } from "./productsThunks";
 
 
 const initialStateProducts = {
     products: [],
+    product: {},
     loading: false,
     error: null,
 };
@@ -12,7 +13,11 @@ const initialStateProducts = {
 export const productsSlice = createSlice({
     name: "products",
     initialState: initialStateProducts,
-    reducers: { },
+    reducers: { 
+        readProduct: (state, action) => {
+            state.product = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(createProduct.pending, (state) => {
