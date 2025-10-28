@@ -17,17 +17,32 @@ const Navbar = () => {
     }
 
     return (
-        <nav>
-            <NavLink to="/" className={({isActive})=> isActive ? "active" : "" }>Home</NavLink>
-            <NavLink to="/register" className={({isActive})=> isActive ? "active" : "" }>Registrate</NavLink>
-            {user ?
-                <NavLink to="/" className={({isActive})=> isActive ? "active" : "" } onClick={handleLogout}>Cerrar Sesión</NavLink>
-                :
-                <NavLink to="/login" className={({isActive})=> isActive ? "active" : "" }>Inicia Sesión</NavLink>
-            }
-            <NavLink to="/admin-users" className={({isActive})=> isActive ? "active" : "" }>Admin_Users</NavLink>
-            <NavLink to="/admin-products" className={({isActive})=> isActive ? "active" : "" }>Admin_Products</NavLink>
-            <NavLink to="/cart" className={({isActive})=> isActive ? "active" : "" }>Carrito</NavLink>
+        <nav className='nav'>
+            <ul className='nav_ul'>
+                <li className='nav_li'>
+                    <NavLink to="/" className={({ isActive }) => isActive ? "active" : "no_active"} >Home</NavLink>
+                </li>
+                <li className='nav_li'>
+                    <NavLink to="/register" className={({ isActive }) => isActive ? "active" : "no_active"}>Registrate</NavLink>
+                </li>
+                <li className='nav_li'>
+                    {user ?
+                        <NavLink to="/" className={({ isActive }) => isActive ? "active" : "no_active"} onClick={handleLogout}>Cerrar Sesión</NavLink>
+                        :
+                        <NavLink to="/login" className={({ isActive }) => isActive ? "active" : "no_active"}>Inicia Sesión</NavLink>
+                    }
+                </li>
+                <li className='nav_li'>
+                    <NavLink to="/admin-users" className={({ isActive }) => isActive ? "active" : "no_active"}>Admin_Users</NavLink>
+                </li>
+                <li className='nav_li'>
+                    <NavLink to="/admin-products" className={({ isActive }) => isActive ? "active" : "no_active"}>Admin_Products</NavLink>
+                </li>
+                <li className='nav_li'>
+                    <NavLink to="/cart" className={({ isActive }) => isActive ? "active" : "no_active"}>Carrito</NavLink>
+                </li>
+            </ul>
+
         </nav>
     );
 }

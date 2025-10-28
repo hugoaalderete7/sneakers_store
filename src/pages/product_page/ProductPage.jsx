@@ -1,7 +1,7 @@
 import React from 'react';
 import "./ProductPage.css";
 import { useSelector } from 'react-redux';
-import CartForm from '../../components/form/CartForm';
+import CartForm from '../../components/form/cart_form/CartForm';
 
 const ProductPage = () => {
     const product = useSelector((state) => state.products.product);

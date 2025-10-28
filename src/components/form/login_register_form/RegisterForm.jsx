@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import UseForm from '../../hooks/useForm';
-import "./RegisterForm.css";
+import UseForm from '../../../hooks/useForm';
+import "./LoginRegisterForm.css";
 import { useDispatch } from 'react-redux';
-import { createUser } from '../../store/slices/users/usersThunks';
+import { createUser } from '../../../store/slices/users/usersThunks';
 
 let styles = {
     fontWeight: "bold",
@@ -51,7 +51,7 @@ const RegisterForm = () => {
     return (
         <div className='form-container'>
             <form className='form'>
-                <h2 className='h2-login-register'>Registrate aqui !!</h2>
+                <h2 className='h2-login-register'>Regístrate aquí !!</h2>
                 <input
                     className="input-login-register"
                     name='name'

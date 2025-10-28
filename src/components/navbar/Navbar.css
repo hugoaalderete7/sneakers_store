@@ -2,30 +2,21 @@
     font-weight: 100;
     padding: 0;
     margin: 0;
-    /* box-sizing: border-box; */
 }
 
 .nav {
-    background-image: url(../../../imagenes/MaderaMasOscura.jpg);
+    position: fixed;
+    top: 10%;
     height: 50px;
-    /* width: 100vw; */
-    border: solid 5px #000;
+    width: 100vw;
     display: flex;
     justify-content: center;
-    box-sizing: border-box;
 }
 
 .nav_ul {
+    width: 80%;
     display: flex;
-    align-items: center;
-    width: 50%;
-    height: 100%;
-}
-
-.nav_li-container {
-    width: 100%;
-    display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
 }
 
 .nav_li {
@@ -34,30 +25,28 @@
     font-size: 17px;
 }
 
-.nav_li:hover {
-    color: #bbb;
-}
-
-.nav_li Select {
+.active {
     color: #000;
 }
 
-.link{
-    color: #fff;
-    text-decoration: none;
-}
-
-.link:hover{
+.active:hover {
     color: #bbb;
 }
 
+.no_active{
+    color: #626060;
+}
+
+.no_active:hover {
+    color: #bbb;
+}
 
 @media only screen and (max-width: 500px) {
 
     .nav_ul {
         width: 90%;
     }
-    
+
     .nav_li {
         font-size: 15px;
     }

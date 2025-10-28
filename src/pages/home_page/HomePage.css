@@ -1,0 +1,48 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.global_container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../../../images/fondo_mejorado.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.section_container {
+  position: absolute;
+  top: 25%;
+  left: 1%;
+  width: 25%;
+}
+
+.section_title h2 {
+  color: #000;
+  font-size: 40px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.section_username h3 {
+  color: #000;
+  margin-top: 5%;
+  font-size: 30px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.section_button button {
+  background-color: transparent;
+  border: solid 1px #000;
+  margin-top: 5%;
+  width: 100%;
+  font-size: 20px;
+}
+

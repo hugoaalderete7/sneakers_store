@@ -1,8 +1,8 @@
 import React from 'react';
-import UseForm from '../../hooks/useForm';
-import "./LoginForm.css";
+import UseForm from '../../../hooks/useForm';
+import "./LoginRegisterForm.css";
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/slices/auth/authThunks';
+import { login } from '../../../store/slices/auth/authThunks';
 import { useNavigate } from 'react-router-dom';
 
 

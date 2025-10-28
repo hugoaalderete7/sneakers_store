@@ -1,6 +1,8 @@
 import React from 'react';
-import LoginForm from '../../components/form/LoginForm';
+import LoginForm from '../../components/form/login_register_form/LoginForm';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import "./LoginPage.css"
 
 const LoginPage = () => {
 
@@ -9,15 +11,16 @@ const LoginPage = () => {
     console.log("User en LoginPage:", user);
 
     return (
-        <div>
-            <LoginForm />
-            <ul>
-                <li>Email: {user.email}</li>
-                <li>Admin: {user.admin}</li>
-                <li>Nombre: {user.name}</li>
-                <li>Apellido: {user.lastname}</li>
-                <li>Token: {token ? "Sí" : "No"}</li>
-            </ul>
+           <div className='login_global_container'>
+            <img src="../../../images/fondo_mejorado.png" alt="" className='login_img' />
+            <section className='login_form_container'>
+                <section>
+                    <LoginForm />
+                </section>
+                <section className='login_navlink_container'>
+                    <NavLink to="/" className="login_navlink" >Volver</NavLink>
+                </section>
+            </section>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductsForm from '../../components/form/ProductsForm';
+import ProductsForm from '../../components/form/products_form/ProductsForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { readProducts } from '../../store/slices/products/productsThunks';

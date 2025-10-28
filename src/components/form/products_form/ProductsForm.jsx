@@ -1,33 +1,57 @@
-import React from 'react';
-import UseForm from '../../hooks/useForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createProductCart } from '../../store/slices/cart/cartSlice';
+import React, { useEffect } from 'react';
+import UseForm from '../../../hooks/useForm';
+import "./ProductsForm.css";
+import { useDispatch } from 'react-redux';
+import { createProduct } from '../../../store/slices/products/productsThunks';
 
-const CartForm = () => {
-    const product = useSelector((state) => state.products.product);
+
+let styles = {
+    fontWeight: "bold",
+    color: "#dc3545"
+}
+
+const ProductsForm = () => {
+    const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleChecked, handleBlurProducts } = UseForm();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleBlurCart, handleChecked, handleChangeCart } = UseForm();
-    console.log("Producto en CartForm:", form);
+
+    // useEffect(() => {
+    //     if (dataToEdit) {
+    //         setForm(dataToEdit)
+    //     } else {
+    //         setForm(initialForm)
+    //     }
+    // }, [dataToEdit])
 
 
-    const styles = {
-        fontWeight: "bold",
-        color: "#ff0000",
-    };
-
-    const handleSubmitCart = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault();
-        dispatch(createProductCart(form));
-        setForm(initialForm);
-        setErrors(initialErrors);
-        navigate("/products")
+        try {
+            if (JSON.stringify(form) === JSON.stringify(initialForm)) {
+                return alert("El formulario está vacío, debes llenar todos los campos requeridos !!");
+            }
+
+            // if (!form._id) {
+            if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
+                dispatch(createProduct(form));
+                alert("Producto creado con éxito !!");
+                setForm(initialForm);
+                setErrors(initialErrors);
+            }
+            else {
+                alert('Debes completar correctamente todos los campos !!');
+            }
+            // } else {
+            //     UpDateUsers(form);
+            // }
+        } catch (error) {
+            console.log(error);
+            setForm(initialForm);
+        }
     }
 
-
     return (
-        <div>
+        <div className='products-total-form-container'>
+
             <h2 className='products-h2'>Ingresar Producto:</h2>
 
             <form className='products-form-container'>
@@ -35,46 +59,43 @@ const CartForm = () => {
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="name">Nombre:</label>
                     <input
-                        id='name'
                         className="products-input-first"
                         name='name'
                         type='text'
-                        //placeholder='Nombre del Producto'
-                        onChange={handleChangeCart}
-                        //onBlur={handleBlurCart}
-                        value={product.name || ""}
+                        placeholder='Nombre del Producto'
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.name || ""}
                     />
 
-                    {/* {errors.name && <p style={styles}>{errors.name}</p>} */}
+                    {errors.name && <p style={styles}>{errors.name}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="sex">Sexo:</label>
                     <select
-                    id='sex'
                         className='products-select'
                         name='sex'
-                        onChange={handleChangeCart}
-                        //onBlur={handleBlurCart}
-                        value={product.sex || ''}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.sex || ''}
                     >
                         <option value="">---</option>
                         <option value="men">Hombre</option>
                         <option value="women">Mujer</option>
                     </select>
 
-                    {/* {errors.sex && <p style={styles}>{errors.sex}</p>} */}
+                    {errors.sex && <p style={styles}>{errors.sex}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="brand">Marca:</label>
                     <select
-                    id='brand'
                         className='products-select'
                         name='brand'
-                        onChange={handleChangeCart}
-                        //onBlur={handleBlurCart}
-                        value={product.brand || ''}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.brand || ''}
                     >
                         <option value="">---</option>
                         <option value="adidas">Adidas</option>
@@ -83,18 +104,17 @@ const CartForm = () => {
                         <option value="puma">Puma</option>
                     </select>
 
-                    {/* {errors.brand && <p style={styles}>{errors.brand}</p>} */}
+                    {errors.brand && <p style={styles}>{errors.brand}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="sport">Disciplina:</label>
                     <select
-                    id='sport'
                         className='products-select'
                         name='sport'
-                        onChange={handleChangeCart}
-                        //onBlur={handleBlurCart}
-                        value={product.sport || ''}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.sport || ''}
                     >
                         <option value="">---</option>
                         <option value="running">Running</option>
@@ -102,7 +122,7 @@ const CartForm = () => {
                         <option value="trainning">Trainning</option>
                     </select>
 
-                    {/* {errors.sport && <p style={styles}>{errors.sport}</p>} */}
+                    {errors.sport && <p style={styles}>{errors.sport}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
@@ -110,8 +130,8 @@ const CartForm = () => {
                     <select
                         className='products-select'
                         name='size'
-                        onChange={handleChangeCart}
-                        onBlur={handleBlurCart}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
                         value={form.size || ''}
                     >
                         <option value="">---</option>
@@ -131,8 +151,8 @@ const CartForm = () => {
                     <select
                         className='products-select'
                         name='color'
-                        onChange={handleChangeCart}
-                        onBlur={handleBlurCart}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
                         value={form.color || ''}
                     >
                         <option value="">---</option>
@@ -153,50 +173,48 @@ const CartForm = () => {
                     <label className="products-label" for="cantIngr">Cantidad:</label>
                     <input
                         className="products-input"
-                        name='quantity'
+                        name='cantIngr'
                         type='number'
                         placeholder='Cantidad'
-                        onChange={handleChangeCart}
-                        onBlur={handleBlurCart}
-                        value={form.quantity || ''}
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.cantIngr || ''}
                     />
 
-                    {errors.quantity && <p style={styles}>{errors.quantity}</p>}
+                    {errors.cantIngr && <p style={styles}>{errors.cantIngr}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="price">Precio:</label>
                     <input
-                    id='price'
                         className="products-input"
                         name='price'
                         type='number'
-                        //placeholder='Precio'
-                        onChange={handleChangeCart}
-                        //onBlur={handleBlurCart}
-                        value={product.price || ''}
+                        placeholder='Precio'
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.price || ''}
                     />
 
-                    {/* {errors.price && <p style={styles}>{errors.price}</p>} */}
+                    {errors.price && <p style={styles}>{errors.price}</p>}
                 </section>
 
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="image">Imagen:</label>
                     <input
-                    id='image'
                         className="products-input"
                         name='image'
                         type='text'
-                        //placeholder='Imagen del Producto'
-                        onChange={handleChangeCart}
-                        //onBlur={handleBlurCart}
-                        value={product.image || ''}
+                        placeholder='Imagen del Producto'
+                        onChange={handleChange}
+                        onBlur={handleBlurProducts}
+                        value={form.image || ''}
                     />
 
-                    {/* {errors.image && <p style={styles}>{errors.image}</p>} */}
+                    {errors.image && <p style={styles}>{errors.image}</p>}
                 </section>
 
-                {/* <section className='products-check-label-input  products-section-grid-item'>
+                <section className='products-check-label-input  products-section-grid-item'>
                     <label className="products-check-label" for="myCheckbox">Publicar</label>
                     <input
                         className="products-check-input"
@@ -205,12 +223,12 @@ const CartForm = () => {
                         type='checkbox'
                         onChange={handleChecked}
                         value={form.published || false}
-                        onBlur={handleBlurCart}
+                        onBlur={handleBlurProducts}
                     />
-                </section> */}
+                </section>
 
                 <section className='products-section-grid-item'>
-                    <button type= "button" className="products-form-button" onClick={handleSubmitCart}>Agregar al Carrito</button>
+                    <button className="products-form-button" onClick={handleSubmit}>Ingresar</button>
                 </section>
 
             </form>
@@ -218,4 +236,4 @@ const CartForm = () => {
     );
 }
 
-export default CartForm;
+export default ProductsForm;

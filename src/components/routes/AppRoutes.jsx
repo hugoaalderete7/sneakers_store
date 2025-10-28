@@ -5,7 +5,6 @@ import HomePage from '../../pages/home_page/HomePage';
 import RegisterPage from '../../pages/register_page/RegisterPage';
 import AdminUsersPage from '../../pages/admin_users_page/AdminUsersPage';
 import LoginPage from '../../pages/login_page/LoginPage';
-import Navbar from '../navbar/Navbar';
 import ProductsPage from '../../pages/products_page/ProductsPage';
 import AdminProductsPage from '../../pages/admin_products_page/AdminProductsPage';
 import ProductPage from '../../pages/product_page/ProductPage';
@@ -13,8 +12,7 @@ import CartPage from '../../pages/cart_page/CartPage';
 
 const AppRoutes = () => {
     return (
-        <BrowserRouter>
-            <Navbar />
+        <BrowserRouter >
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/register" element={<RegisterPage />} />

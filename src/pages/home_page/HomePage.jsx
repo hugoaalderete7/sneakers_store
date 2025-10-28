@@ -1,44 +1,51 @@
-import React, { use, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { setLogout } from '../../store/slices/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import "./HomePage.css";
+import Navbar from "../../components/navbar/Navbar";
 
 
 const HomePage = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
     const [userName, setUserName] = useState("");
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
-
-    console.log("Usuario en HomePage:", user);
-
 
     useEffect(() => {
         checkToken();
     }, [token]);
 
     const checkToken = () => {
-
         if (!token) {
             dispatch(setLogout());
             setUserName("");
             return;
         }
-
         const dataToken = JSON.parse(token);
         setUserName(dataToken.usuario.name);
     }
 
-
     return (
-        <div>
-            {userName ?
-                <h2>Hola {userName}!!!</h2>
-                :
-                <h2>Inicia Sesión</h2>
-            }
-            <button onClick={() => navigate("/products")}>ProductsPage</button>
+        <div className='global_container'>
+            <article>
+                <Navbar />
+            </article>
+            <article className='section_container'>
+                <section className='section_title'>
+                    <h2>Sneakers Store</h2>
+                </section>
+                <section className='section_username'>
+                    {userName ?
+                        <h3>Hola {userName} !!</h3>
+                        :
+                        <h3>Hola !!</h3>
+                    }
+                </section>
+                <section className='section_button'>
+                    <button onClick={() => navigate("/products")}>Haz click aquí y encuentra lo que tanto buscas</button>
+                </section>
+            </article>
         </div>
     );
 }
