@@ -1,0 +1,32 @@
+.no-transp-navbar-container{
+    margin-bottom: 80px;
+}
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items: center;
+    width: 80vw;
+    margin-left: 17vw;
+}
+
+.card{
+    width: 18vw;
+    border: solid 1px #737070;
+    border-radius: 20px;
+    margin: 1%;
+}
+
+.filters-container{
+    width: 15vw;
+    height: 100vh;
+    background-color:#dbd6d6;
+    position: fixed;
+    top: 0;
+}
+
+.filters-cards-container{
+    display: flex;
+}
+

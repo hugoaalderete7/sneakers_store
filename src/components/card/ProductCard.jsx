@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { readProduct } from '../../store/slices/products/productsThunks';
 import { useNavigate } from 'react-router-dom';
 
-
 const ProductCard = ({ el }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,14 +20,13 @@ const ProductCard = ({ el }) => {
         navigate("/product");
     }
 
-
     return (
-        <div>
-            <article className='product-card'>
-                <img className='image-card' src={el.image} />
+        <div >
+            <img className='image-card' src={el.image} />
+            <section className='price-button-container'>
                 <h3 className='price-card'>{formatter.format(el.price)}</h3>
                 <button className='button-card' onClick={() => handleReadProduct(el)}>Ver Mas</button>
-            </article>
+            </section>
         </div>
     );
 }
