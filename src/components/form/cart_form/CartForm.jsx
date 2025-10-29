@@ -22,13 +22,12 @@ const CartForm = () => {
         dispatch(createProductCart(form));
         setForm(initialForm);
         setErrors(initialErrors);
-        navigate("/products")
     }
 
 
     return (
         <div>
-            <h2 className='products-h2'>Ingresar Producto:</h2>
+            <h2 className='products-h2'>Debes seleccionar Talle, Color y Cantidad:</h2>
 
             <form className='products-form-container'>
 

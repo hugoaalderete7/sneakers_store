@@ -1,0 +1,56 @@
+.product-page-grid-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 100vw;
+}
+
+.product-form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.image-name-price-container {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.form-container {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-container {
+    position: absolute;
+}
+
+.name-price-container {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    top: 325px;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.product-price {
+    font-weight: bold;
+}
+
+.go-container{
+    position: absolute;
+    top: 380px;
+}
+
+.go-products-page{
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
