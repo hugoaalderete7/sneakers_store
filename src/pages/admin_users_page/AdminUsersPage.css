@@ -1,0 +1,43 @@
+.admin-users-page-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.navbar-admin-container {
+    width: 100vw;
+}
+
+.form-users-admin-container {
+    width: 100vw;
+    display: flex;
+    height: 100vh;
+}
+
+.form-admin-container {
+    width: 25vw;
+    margin: auto 30px;
+    position: fixed;
+    top: 10vh;
+}
+
+.search-users-admin-container {
+    width: 75vw;
+    margin-top: 20vh;
+    margin-left: 25vw;
+}
+
+.search-admin{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.info-users-admin{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.info-users-admin h4{
+    margin: auto;
+    padding: 10px;
+}

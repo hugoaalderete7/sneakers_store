@@ -51,7 +51,7 @@ const RegisterForm = () => {
     return (
         <div className='form-container'>
             <form className='form'>
-                <h2 className='h2-login-register'>Regístrate aquí !!</h2>
+                <h2 className='h2-login-register'>Registrar aquí:</h2>
                 <input
                     className="input-login-register"
                     name='name'
