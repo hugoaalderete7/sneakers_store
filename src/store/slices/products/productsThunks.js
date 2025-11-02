@@ -38,3 +38,31 @@ export const readProduct = (el) => {
         payload: el
     }
 }
+
+// Actualizar un producto:
+export const updateProducts = createAsyncThunk(
+    "products/updateProducts",
+    async (productData, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(`http://localhost:4000/api/products/${productData._id}`, productData);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+// Eliminar un producto:
+export const deleteProduct = createAsyncThunk(
+    "products/deleteProduct",
+    async (productId, { rejectWithValue }) => {
+        try {
+            const response = await axios.delete(`http://localhost:4000/api/products/${productId}`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);

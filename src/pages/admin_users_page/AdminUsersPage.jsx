@@ -20,16 +20,18 @@ const AdminUsersPage = () => {
     }, [dispatch]);
 
     return (
-        <div className='admin-users-page-container'>
-            <section className='navbar-admin-container'>
+        <div className='users-admin-page-container'>
+            <section className='navbar-users-admin-container'>
                 <No_Transp_Navbar />
             </section>
-            <section className='form-users-admin-container'>
-                <section className='form-admin-container'>
+
+            <section className='form-search-users-admin-container'>
+                <section className='form-users-admin-container'>
                     <RegisterForm />
                 </section>
+                
                 <section className='search-users-admin-container'>
-                    <section className='search-admin'>
+                    <section className='search-users-admin'>
                         <h2 style={{ color: 'red', fontWeight: 'bold' }}>BUSCADOR</h2>
                     </section>
                     <section>
@@ -44,12 +46,6 @@ const AdminUsersPage = () => {
 
                         ))}
                     </section>
-
-                    {/* <ul>
-                        {users.map(user => (
-                            <li key={user.id}>{user.name} - {user.email} - {user.admin}</li>
-                        ))}
-                    </ul> */}
                 </section>
             </section>
         </div>

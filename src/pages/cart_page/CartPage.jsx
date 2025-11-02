@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import No_Transp_Navbar from '../../components/navbar/No_Transp_Navbar';
 import "./CartPage.css";

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import UseForm from '../../../hooks/useForm';
 import "./ProductsForm.css";
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../../../store/slices/products/productsThunks';
+import { createProduct, updateProducts } from '../../../store/slices/products/productsThunks';
 
 
 let styles = {
@@ -10,17 +10,17 @@ let styles = {
     color: "#dc3545"
 }
 
-const ProductsForm = () => {
+const ProductsForm = ({ dataToEdit, setDataToEdit }) => {
     const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleChecked, handleBlurProducts } = UseForm();
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (dataToEdit) {
-    //         setForm(dataToEdit)
-    //     } else {
-    //         setForm(initialForm)
-    //     }
-    // }, [dataToEdit])
+    useEffect(() => {
+        if (dataToEdit) {
+            setForm(dataToEdit)
+        } else {
+            setForm(initialForm)
+        }
+    }, [dataToEdit])
 
 
     async function handleSubmit(e) {
@@ -30,7 +30,7 @@ const ProductsForm = () => {
                 return alert("El formulario está vacío, debes llenar todos los campos requeridos !!");
             }
 
-            // if (!form._id) {
+            if (!form._id) {
             if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
                 dispatch(createProduct(form));
                 alert("Producto creado con éxito !!");
@@ -40,22 +40,28 @@ const ProductsForm = () => {
             else {
                 alert('Debes completar correctamente todos los campos !!');
             }
-            // } else {
-            //     UpDateUsers(form);
-            // }
+            } else {
+                dispatch(updateProducts(form));
+                alert("Producto actualizado con éxito !!");
+                setForm(initialForm);
+                setErrors(initialErrors);
+                setDataToEdit(null);
+            }
         } catch (error) {
             console.log(error);
             setForm(initialForm);
         }
     }
 
+    const handleClear = () => {
+        setForm(initialForm);
+        setErrors(initialErrors);
+        setDataToEdit(null);
+    }
+
     return (
         <div className='products-total-form-container'>
-
-            <h2 className='products-h2'>Ingresar Producto:</h2>
-
             <form className='products-form-container'>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="name">Nombre:</label>
                     <input
@@ -67,10 +73,8 @@ const ProductsForm = () => {
                         onBlur={handleBlurProducts}
                         value={form.name || ""}
                     />
-
                     {errors.name && <p style={styles}>{errors.name}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="sex">Sexo:</label>
                     <select
@@ -84,10 +88,8 @@ const ProductsForm = () => {
                         <option value="men">Hombre</option>
                         <option value="women">Mujer</option>
                     </select>
-
                     {errors.sex && <p style={styles}>{errors.sex}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="brand">Marca:</label>
                     <select
@@ -103,10 +105,8 @@ const ProductsForm = () => {
                         <option value="fila">Fila</option>
                         <option value="puma">Puma</option>
                     </select>
-
                     {errors.brand && <p style={styles}>{errors.brand}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="sport">Disciplina:</label>
                     <select
@@ -121,10 +121,8 @@ const ProductsForm = () => {
                         <option value="trekking">Trekking</option>
                         <option value="trainning">Trainning</option>
                     </select>
-
                     {errors.sport && <p style={styles}>{errors.sport}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="size">Talle:</label>
                     <select
@@ -142,10 +140,8 @@ const ProductsForm = () => {
                         <option value="41">41</option>
                         <option value="42">42</option>
                     </select>
-
                     {errors.size && <p style={styles}>{errors.size}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="color">Color:</label>
                     <select
@@ -165,10 +161,8 @@ const ProductsForm = () => {
                         <option value="natural">Natural</option>
                         <option value="combinado">Combinado</option>
                     </select>
-
                     {errors.color && <p style={styles}>{errors.color}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="cantIngr">Cantidad:</label>
                     <input
@@ -180,10 +174,8 @@ const ProductsForm = () => {
                         onBlur={handleBlurProducts}
                         value={form.cantIngr || ''}
                     />
-
                     {errors.cantIngr && <p style={styles}>{errors.cantIngr}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="price">Precio:</label>
                     <input
@@ -195,10 +187,8 @@ const ProductsForm = () => {
                         onBlur={handleBlurProducts}
                         value={form.price || ''}
                     />
-
                     {errors.price && <p style={styles}>{errors.price}</p>}
                 </section>
-
                 <section className='products-section-grid-item'>
                     <label className="products-label" for="image">Imagen:</label>
                     <input
@@ -210,10 +200,8 @@ const ProductsForm = () => {
                         onBlur={handleBlurProducts}
                         value={form.image || ''}
                     />
-
                     {errors.image && <p style={styles}>{errors.image}</p>}
                 </section>
-
                 <section className='products-check-label-input  products-section-grid-item'>
                     <label className="products-check-label" for="myCheckbox">Publicar</label>
                     <input
@@ -226,11 +214,14 @@ const ProductsForm = () => {
                         onBlur={handleBlurProducts}
                     />
                 </section>
-
                 <section className='products-section-grid-item'>
-                    <button className="products-form-button" onClick={handleSubmit}>Ingresar</button>
+                    <button className="products-form-button" onClick={handleSubmit}>
+                        {dataToEdit? 'Actualizar' : 'Ingresar'}
+                    </button>
+                    <button className="products-form-button" onClick={handleClear} type='button'>
+                        Limpiar
+                    </button>
                 </section>
-
             </form>
         </div>
     );

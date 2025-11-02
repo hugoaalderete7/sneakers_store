@@ -1,19 +1,19 @@
-.admin-users-page-container {
+.users-admin-page-container {
     width: 100vw;
     height: 100vh;
 }
 
-.navbar-admin-container {
+.navbar-users-admin-container {
     width: 100vw;
 }
 
-.form-users-admin-container {
+.form-search-users-admin-container {
     width: 100vw;
     display: flex;
     height: 100vh;
 }
 
-.form-admin-container {
+.form-users-admin-container {
     width: 25vw;
     margin: auto 30px;
     position: fixed;
@@ -26,7 +26,7 @@
     margin-left: 25vw;
 }
 
-.search-admin{
+.search-users-admin{
     display: flex;
     justify-content: center;
     margin-bottom: 20px;

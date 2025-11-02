@@ -1,0 +1,53 @@
+.products-admin-page-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.navbar-products-admin-container {
+    width: 100vw;
+}
+
+.form-search-products-admin-container {
+    width: 100vw;
+    display: flex;
+    height: 100vh;
+}
+
+.form-products-admin-container {
+    width: 25vw;
+    margin: auto 30px;
+    position: fixed;
+    top: 15vh;
+}
+
+.form-products-admin{
+    width: 100%;
+}
+
+.search-products-admin-container {
+    width: 70vw;
+    margin-top: 20vh;
+    margin-left: 28%;
+}
+
+.search-products-admin{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.info-products-admin{
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+}
+
+.info-products-admin h4{
+    margin: auto;
+    padding: 10px;
+}
+
+.info-products-admin button{
+    width: 90%;
+    height: 70%;
+    text-align: center;
+}

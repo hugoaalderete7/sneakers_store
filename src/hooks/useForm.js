@@ -77,28 +77,28 @@ const UseForm = () => {
         let regexComments2 = /^.{5,6}$/;
         let regexNumber = /^[0-9]*$/;
         if (!form.name?.trim()) {
-            errors.name = 'El campo "Nombre" es requerido'
+            errors.name = 'Campo requerido'
         } else if (!regexName.test(form.name.trim())) {
-            errors.name = 'El campo "Nombre" solo acepta letras y espacios en blanco'
+            errors.name = 'Sólo letras y espacios'
         } else if (!regexComments.test(form.name.trim())) {
-            errors.name = 'El campo "Nombre" no debe tener mas de 20 caracteres'
+            errors.name = 'Máximo 20 caracteres'
         } else
             if (!form.cantIngr?.trim()) {
-                errors.cantIngr = 'El campo "CantIngr" es requerido';
+                errors.cantIngr = 'Campo requerido';
             } else if (!regexNumber.test(form.cantIngr.trim())) {
-                errors.cantIngr = 'El campo "CantIngr" debe ser un numero'
+                errors.cantIngr = 'Debe ser un numero'
             } else if (!regexComments1.test(form.cantIngr.trim())) {
-                errors.cantIngr = 'El campo "CantIngr" solo admite hasta 3 caracteres'
+                errors.cantIngr = 'Máximo 3 cifras'
             } else
                 if (!form.price?.trim()) {
-                    errors.price = 'El campo "Precio" es requerido';
+                    errors.price = 'Campo requerido';
                 } else if (!regexNumber.test(form.price.trim())) {
-                    errors.price = 'El campo "Precio" debe ser un numero'
+                    errors.price = 'Debe ser un numero'
                 } else if (!regexComments2.test(form.price.trim())) {
-                    errors.price = 'El campo "Precio" solo admite 5 o 6 caracteres'
+                    errors.price = 'Sólo 5 o 6 cifras'
                 } else
                     if (!form.image?.trim()) {
-                        errors.image = 'El campo "Imagen" es requerido';
+                        errors.image = 'Campo requerido';
                     }
 
         return errors;
@@ -113,28 +113,28 @@ const UseForm = () => {
         let regexComments2 = /^.{5,6}$/;
         let regexNumber = /^[0-9]*$/;
         if (!form.name?.trim()) {
-            errors.name = 'El campo "Nombre" es requerido'
+            errors.name = 'Campo requerido'
         } else if (!regexName.test(form.name.trim())) {
-            errors.name = 'El campo "Nombre" solo acepta letras y espacios en blanco'
+            errors.name = 'Sólo letras y espacios'
         } else if (!regexComments.test(form.name.trim())) {
-            errors.name = 'El campo "Nombre" no debe tener mas de 20 caracteres'
+            errors.name = 'Máximo 20 caracteres'
         } else
             if (!form.cantIngr?.trim()) {
-                errors.cantIngr = 'El campo "CantIngr" es requerido';
+                errors.cantIngr = 'Campo requerido';
             } else if (!regexNumber.test(form.cantIngr.trim())) {
-                errors.cantIngr = 'El campo "CantIngr" debe ser un numero'
+                errors.cantIngr = 'Debe ser un numero'
             } else if (!regexComments1.test(form.cantIngr.trim())) {
-                errors.cantIngr = 'El campo "CantIngr" solo admite hasta 3 caracteres'
+                errors.cantIngr = 'Máximo 3 cifras'
             } else
                 if (!form.price?.trim()) {
-                    errors.price = 'El campo "Precio" es requerido';
+                    errors.price = 'Campo requerido';
                 } else if (!regexNumber.test(form.price.trim())) {
-                    errors.price = 'El campo "Precio" debe ser un numero'
+                    errors.price = 'Debe ser un numero'
                 } else if (!regexComments2.test(form.price.trim())) {
-                    errors.price = 'El campo "Precio" solo admite 5 o 6 caracteres'
+                    errors.price = 'Sólo 5 o 6 cifras'
                 } else
                     if (!form.image?.trim()) {
-                        errors.image = 'El campo "Imagen" es requerido';
+                        errors.image = 'Campo requerido';
                     }
 
         return errors;
