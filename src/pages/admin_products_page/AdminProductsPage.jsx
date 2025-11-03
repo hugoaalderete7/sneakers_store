@@ -5,50 +5,74 @@ import { useEffect } from 'react';
 import { readProducts, deleteProduct } from '../../store/slices/products/productsThunks';
 import No_Transp_Navbar from '../../components/navbar/No_Transp_Navbar';
 import './AdminProductsPage.css';
+import Searcher from '../../components/searcher/Searcher';
 
 const AdminProductsPage = () => {
     const products = useSelector((state) => state.products.products);
     const dispatch = useDispatch();
     const [dataToEdit, setDataToEdit] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState(products);
+    const [busqueda, setBusqueda] = useState('');
 
     useEffect(() => {
-        dispatch(readProducts());
+        GetProducts();
     }, [dispatch]);
+
+    useEffect(() => {
+        setFilteredProducts(products); 
+    }, [products]); 
+
+    const GetProducts = async () => {
+        try {
+            await dispatch(readProducts()).unwrap();
+        } catch (error) {
+            console.error("Error al obtener los productos:", error);
+        }
+    };
 
     const handleEdit = (product) => {
         setDataToEdit(product);
+        setBusqueda('');
     };
 
     const handleDelete = async (product) => {
         try {
             await dispatch(deleteProduct(product._id)).unwrap(); // Asegura que se maneje la promesa correctamente
             dispatch(readProducts());
+            setBusqueda('');
         } catch (error) {
             console.error("Error al eliminar el producto:", error);
         }
     };
 
+    let formatter = new Intl.NumberFormat('eng-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0
+    })
+
     return (
         <div className='products-admin-page-container'>
-            <section className='navbar-users-admin-container'>
+            <section className='navbar-products-admin-container'>
                 <No_Transp_Navbar />
             </section>
             <section className='form-search-products-admin-container'>
                 <section className='form-products-admin-container'>
                     <section className='form-products-admin'>
-                        <ProductsForm dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} />
+                        <ProductsForm dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} busqueda={busqueda}/>
                     </section>
                 </section>
                 <section className='search-products-admin-container'>
                     <section className='search-products-admin'>
-                        <h2 style={{ color: 'red', fontWeight: 'bold' }}>BUSCADOR</h2>
+                        <Searcher products={products} setProductData={setFilteredProducts} busqueda={busqueda} setBusqueda={setBusqueda} />
                     </section>
                     <section>
                         <ul>
-                            {products.map((product) => (
+                            {filteredProducts.map((product) => (
                                 <section className='info-products-admin'>
                                     <h4 key={product.id}>{product.name}</h4>
-                                    <h4>{product.price}</h4>
+                                    <h4>{formatter.format(product.price)}</h4>
                                     <h4>{product.brand}</h4>
                                     <h4>{product.sex}</h4>
                                     <h4>{product.sport}</h4>
@@ -71,5 +95,4 @@ const AdminProductsPage = () => {
         </div>
     );
 }
-
 export default AdminProductsPage;

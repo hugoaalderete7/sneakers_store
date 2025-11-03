@@ -85,8 +85,8 @@ const ProductsForm = ({ dataToEdit, setDataToEdit }) => {
                         value={form.sex || ''}
                     >
                         <option value="">---</option>
-                        <option value="men">Hombre</option>
-                        <option value="women">Mujer</option>
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
                     </select>
                     {errors.sex && <p style={styles}>{errors.sex}</p>}
                 </section>
