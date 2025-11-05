@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./ProductPage.css";
 import { useSelector } from 'react-redux';
 import CartForm from '../../components/form/cart_form/CartForm';
@@ -9,11 +9,12 @@ const ProductPage = () => {
     const product = useSelector((state) => state.products.product);
     console.log("Producto en ProductPage:", product);
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
 
     return (
         <div className='product-page-grid-container'>
             <section>
-                <No_Transp_Navbar />
+                <No_Transp_Navbar user={user} setUser={setUser} />
             </section>
             <section className='product-form-container'>
                 {product ? (

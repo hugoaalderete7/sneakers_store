@@ -9,6 +9,7 @@ import Filter from '../../components/filters/filter';
 const ProductsPage = () => {
     const products = useSelector((state) => state.products.products);
     const dispatch = useDispatch();
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         dispatch(readProducts());
@@ -20,7 +21,7 @@ const ProductsPage = () => {
     return (
         <div>
             <section className='no-transp-navbar-container'>
-                <No_Transp_Navbar />
+                <No_Transp_Navbar user={user} setUser={setUser} />
             </section>
             <section className='filters-cards-container'>
                 <section className='filters-container'>

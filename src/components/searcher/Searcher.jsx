@@ -1,18 +1,16 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import "./Searcher.css"
-import axios from 'axios';
 
 
-const Searcher = ({ products, setProductData, busqueda, setBusqueda }) => {
+const Searcher = ({ elements, setFiltered, busqueda, setBusqueda, products }) => {
 
     const handleChange = e => {
         setBusqueda(e.target.value)
-        filtrar(e.target.value)
+        elements == products ? filtrarProducts(e.target.value) : filtrarUsers(e.target.value)
     }
 
-    const filtrar = (terminoBusqueda) => {
-        var response = products.filter((elemento) => {
+    const filtrarProducts = (terminoBusqueda) => {
+        var response = elements.filter((elemento) => {
             if (elemento.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
                 || elemento.brand.toLowerCase().includes(terminoBusqueda.toLowerCase())
                 || elemento.sex.toLowerCase().includes(terminoBusqueda.toLowerCase())
@@ -20,7 +18,18 @@ const Searcher = ({ products, setProductData, busqueda, setBusqueda }) => {
                 return elemento;
             }
         });
-        setProductData(response);
+        setFiltered(response);
+    }
+
+    const filtrarUsers = (terminoBusqueda) => {
+        var response = elements.filter((elemento) => {
+            if (elemento.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
+                || elemento.lastname.toLowerCase().includes(terminoBusqueda.toLowerCase())
+                || elemento.email.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+                return elemento;
+            }
+        });
+        setFiltered(response);
     }
 
     return (

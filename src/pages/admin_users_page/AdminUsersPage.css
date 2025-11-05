@@ -5,6 +5,10 @@
 
 .navbar-users-admin-container {
     width: 100vw;
+    height: 22vh;
+    position: fixed;
+    background-color: #dbd6d6;
+
 }
 
 .form-search-users-admin-container {
@@ -21,23 +25,28 @@
 }
 
 .search-users-admin-container {
-    width: 75vw;
-    margin-top: 20vh;
-    margin-left: 25vw;
+    width: 70vw;
+    margin-top: 14vh;
+    margin-left: 28%;
 }
 
-.search-users-admin{
+.search-users-admin {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
-.info-users-admin{
+.info-users-admin {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
-.info-users-admin h4{
+.info-users-admin h4 {
     margin: auto;
     padding: 10px;
+}
+
+.info-users-admin button {
+    margin: auto;
+    padding: 5px;
 }

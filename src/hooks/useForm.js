@@ -146,7 +146,7 @@ const UseForm = () => {
         setForm({
             ...form,
             [name]: value,
-            admin: false
+            admin: true
         });
         console.log(form)
     }

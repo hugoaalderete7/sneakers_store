@@ -26,7 +26,6 @@ const LoginForm = () => {
             }
             if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
                 dispatch(login(form));
-                alert("Bienvenido!!!");
                 setForm(initialForm);
                 setErrors(initialErrors);
                 navigate("/");

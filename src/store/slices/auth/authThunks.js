@@ -11,10 +11,12 @@ export const login = createAsyncThunk(
             const response = await axios.post("http://localhost:4000/api/auth", userData);
             console.log(response.data);
             if (response.data) {
-            localStorage.setItem("token", JSON.stringify(response.data));
-        }
+                alert("Bienvenido!!!");
+                localStorage.setItem("token", JSON.stringify(response.data));
+            }
             return response.data;
         } catch (error) {
+            alert("Error en el inicio de sesión. Por favor, verifica tus credenciales.");
             return rejectWithValue(error.response.data);
         }
     }

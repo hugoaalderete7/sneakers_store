@@ -2,25 +2,24 @@ import React, { useEffect } from 'react';
 import UseForm from '../../../hooks/useForm';
 import "./LoginRegisterForm.css";
 import { useDispatch } from 'react-redux';
-import { createUser } from '../../../store/slices/users/usersThunks';
+import { createUser, updateUser } from '../../../store/slices/users/usersThunks';
 
 let styles = {
     fontWeight: "bold",
     color: "#dc3545"
 }
 
-const RegisterForm = () => {
+const RegisterForm = ({ dataToEdit, setDataToEdit, setBusqueda }) => {
     const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleBlurRegister } = UseForm();
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (dataToEdit) {
-    //         setForm(dataToEdit)
-    //     } else {
-    //         setForm(initialForm)
-    //     }
-    // }, [dataToEdit])
-
+    useEffect(() => {
+        if (dataToEdit) {
+            setForm(dataToEdit)
+        } else {
+            setForm(initialForm)
+        }
+    }, [dataToEdit])
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -28,20 +27,22 @@ const RegisterForm = () => {
             if (JSON.stringify(form) === JSON.stringify(initialForm)) {
                 return alert("El formulario está vacío, debes llenar todos los campos requeridos !!");
             }
-
-            // if (!form._id) {
-            if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
-                dispatch(createUser(form));
-                alert("Te registraste con éxito, Inicia Sesion y podras realizar tus compras!!!");
+            if (!form._id) {
+                if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
+                    dispatch(createUser(form));
+                    alert("Te registraste con éxito, Inicia Sesion y podras realizar tus compras!!!");
+                    setForm(initialForm);
+                    setErrors(initialErrors);
+                } else {
+                    alert('Debes completar correctamente todos los campos !!');
+                }
+            } else {
+                dispatch(updateUser(form));
                 setForm(initialForm);
+                setDataToEdit(null);
                 setErrors(initialErrors);
+                setBusqueda('');
             }
-            else {
-                alert('Debes completar correctamente todos los campos !!');
-            }
-            // } else {
-            //     UpDateUsers(form);
-            // }
         } catch (error) {
             console.log(error);
             setForm(initialForm);

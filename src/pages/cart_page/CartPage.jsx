@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import No_Transp_Navbar from '../../components/navbar/No_Transp_Navbar';
 import "./CartPage.css";
 
 const CartPage = () => {
     const cart = useSelector((state) => state.cart);
+    const [user, setUser] = useState(null);
+    
     console.log(cart.cart);
     console.log(cart.quantity)
 
@@ -12,7 +14,7 @@ const CartPage = () => {
         <div>
             <article className='cart-container'>
                 <section className='navbar-container'>
-                    <No_Transp_Navbar />
+                    <No_Transp_Navbar user={user} setUser={setUser} />
                 </section>
                 <section className='products-cart-container'>
                     <section className='total-cart'>

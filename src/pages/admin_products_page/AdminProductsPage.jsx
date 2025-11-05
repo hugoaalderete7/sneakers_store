@@ -19,8 +19,8 @@ const AdminProductsPage = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        setFilteredProducts(products); 
-    }, [products]); 
+        setFilteredProducts(products);
+    }, [products]);
 
     const GetProducts = async () => {
         try {
@@ -60,35 +60,33 @@ const AdminProductsPage = () => {
             <section className='form-search-products-admin-container'>
                 <section className='form-products-admin-container'>
                     <section className='form-products-admin'>
-                        <ProductsForm dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} busqueda={busqueda}/>
+                        <ProductsForm dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} busqueda={busqueda} />
                     </section>
                 </section>
                 <section className='search-products-admin-container'>
                     <section className='search-products-admin'>
-                        <Searcher products={products} setProductData={setFilteredProducts} busqueda={busqueda} setBusqueda={setBusqueda} />
+                        <Searcher elements={products} setFiltered={setFilteredProducts} busqueda={busqueda} setBusqueda={setBusqueda} products={products} />
                     </section>
                     <section>
-                        <ul>
-                            {filteredProducts.map((product) => (
-                                <section className='info-products-admin'>
-                                    <h4 key={product.id}>{product.name}</h4>
-                                    <h4>{formatter.format(product.price)}</h4>
-                                    <h4>{product.brand}</h4>
-                                    <h4>{product.sex}</h4>
-                                    <h4>{product.sport}</h4>
-                                    <h4>{product.color}</h4>
-                                    <h4>{product.size}</h4>
-                                    <h4>{product.cantIngr}</h4>
-                                    <img src={product.image} style={{ width: '6vw' }} />
-                                    <button onClick={() => handleEdit(product)}>
-                                        Actualizar
-                                    </button>
-                                    <button onClick={() => handleDelete(product)}>
-                                        Eliminar
-                                    </button>
-                                </section>
-                            ))}
-                        </ul>
+                        {filteredProducts.map((product) => (
+                            <section className='info-products-admin'>
+                                <h4 key={product.id}>{product.name}</h4>
+                                <h4>{formatter.format(product.price)}</h4>
+                                <h4>{product.brand}</h4>
+                                <h4>{product.sex}</h4>
+                                <h4>{product.sport}</h4>
+                                <h4>{product.color}</h4>
+                                <h4>{product.size}</h4>
+                                <h4>{product.cantIngr}</h4>
+                                <img src={product.image} style={{ width: '6vw' }} />
+                                <button onClick={() => handleEdit(product)}>
+                                    Actualizar
+                                </button>
+                                <button onClick={() => handleDelete(product)}>
+                                    Eliminar
+                                </button>
+                            </section>
+                        ))}
                     </section>
                 </section>
             </section>
