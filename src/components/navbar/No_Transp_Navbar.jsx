@@ -8,9 +8,9 @@ const No_Transp_Navbar = ({ user, setUser }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const authState = useSelector((state) => state.auth);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
         const parseUser = token ? JSON.parse(token).usuario : null;
         setUser(parseUser);
     }, [authState]);
@@ -38,7 +38,18 @@ const No_Transp_Navbar = ({ user, setUser }) => {
                     </li>
                 )}
                 <li className='nav_li'>
-                    <NavLink to="/cart" className={({ isActive }) => isActive ? "active" : "no_active"}>Carrito</NavLink>
+                    <NavLink
+                        to="/cart"
+                        className={({ isActive }) => isActive ? "active" : "no_active"}
+                        onClick={(e) => {
+                            if (!token) {
+                                e.preventDefault(); // Evita la navegación
+                                alert("Si estás registrado, inicia sesión. Sino, regístrate y luego inicia sesión para ver el carrito.");
+                            }
+                        }}
+                    >
+                        Carrito
+                    </NavLink>
                 </li>
                 <li className='nav_li'>
                     <NavLink to="/register" className={({ isActive }) => isActive ? "active" : "no_active"}>Regístrate</NavLink>

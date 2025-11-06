@@ -9,7 +9,7 @@ const RegisterPage = () => {
 
     return (
         <div className='register_global_container'>
-            <article>
+            <article className='register_navbar_container'>
                 <Navbar user={user} setUser={setUser} />
             </article>
             <img src="../../../images/fondo_mejorado.png" alt="" className='register_img' />

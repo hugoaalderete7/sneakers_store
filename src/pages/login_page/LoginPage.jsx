@@ -9,7 +9,7 @@ const LoginPage = () => {
 
     return (
         <div className='login_global_container'>
-            <article>
+            <article className='login_navbar_container'>
                 <Navbar user={user} setUser={setUser} />
             </article>
             <img src="../../../images/fondo_mejorado.png" alt="" className='login_img' />

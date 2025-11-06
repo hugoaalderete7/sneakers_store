@@ -8,9 +8,9 @@ const Navbar = ({ user, setUser }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const authState = useSelector((state) => state.auth);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
         const parseUser = token ? JSON.parse(token).usuario : null;
         setUser(parseUser);
     }, [authState]);
@@ -25,7 +25,7 @@ const Navbar = ({ user, setUser }) => {
         <nav className='nav'>
             <ul className='nav_ul'>
                 <li className='nav_li'>
-                    <NavLink to="/" className={({ isActive }) => isActive ? "active" : "no_active"} >Home</NavLink>
+                    <NavLink to="/" className={({ isActive }) => isActive ? "active" : "no_active"} >Inicio</NavLink>
                 </li>
                 {user && user.admin === 'true' && (
                     <li className='nav_li'>
@@ -38,7 +38,18 @@ const Navbar = ({ user, setUser }) => {
                     </li>
                 )}
                 <li className='nav_li'>
-                    <NavLink to="/cart" className={({ isActive }) => isActive ? "active" : "no_active"}>Carrito</NavLink>
+                    <NavLink
+                        to="/cart"
+                        className={({ isActive }) => isActive ? "active" : "no_active"}
+                        onClick={(e) => {
+                            if (!token) {
+                                e.preventDefault(); // Evita la navegación
+                                alert("Si estás registrado, inicia sesión. Sino, regístrate y luego inicia sesión para ver el carrito.");
+                            }
+                        }}
+                    >
+                        Carrito
+                    </NavLink>
                 </li>
                 <li className='nav_li'>
                     <NavLink to="/register" className={({ isActive }) => isActive ? "active" : "no_active"}>Registrate</NavLink>

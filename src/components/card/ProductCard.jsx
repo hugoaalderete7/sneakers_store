@@ -16,6 +16,12 @@ const ProductCard = ({ el }) => {
     })
 
     const handleReadProduct = (el) => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Si estás registrado, inicia sesión. Sino, regístrate y luego inicia sesión para ver los detalles del producto.");
+            navigate("/login");
+            return;
+        }
         dispatch(readProduct(el));
         navigate("/product");
     }
