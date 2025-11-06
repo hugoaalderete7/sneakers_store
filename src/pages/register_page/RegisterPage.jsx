@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RegisterForm from '../../components/form/login_register_form/RegisterForm';
 import "./RegisterPage.css";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import Navbar from '../../components/navbar/Navbar';
 
 const RegisterPage = () => {
-
-    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
 
     return (
         <div className='register_global_container'>
+            <article>
+                <Navbar user={user} setUser={setUser} />
+            </article>
             <img src="../../../images/fondo_mejorado.png" alt="" className='register_img' />
             <section className='register_form_container'>
                 <section>
