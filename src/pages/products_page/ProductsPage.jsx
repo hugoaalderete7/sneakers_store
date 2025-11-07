@@ -10,13 +10,12 @@ const ProductsPage = () => {
     const products = useSelector((state) => state.products.products);
     const dispatch = useDispatch();
     const [user, setUser] = useState(null);
+    const [productsShow, setProductsShow] = useState([]);
+    console.log(productsShow)
 
     useEffect(() => {
         dispatch(readProducts());
     }, [dispatch]);
-
-    const [productsShow, setProductsShow] = useState([]);
-    console.log(productsShow)
 
     return (
         <div>

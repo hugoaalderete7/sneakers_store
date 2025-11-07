@@ -6,17 +6,37 @@
     margin-top: 100px;
 }
 
-.filter-container h3 {
+.filter-container h4 {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bold;
 }
 
-.filter-container h4 {
+.filter-container h5 {
     text-align: center;
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
-.filter-container h4:hover {
+.filter-container h5:hover {
     color: #bbb;
+}
+
+.selected-filter {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.filter-container button {
+    display: block;
+    margin: 0 auto 10px auto;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #6a6868;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+}
+
+.filter-container button:hover {
+    background-color: #bbb;  
 }
