@@ -13,6 +13,7 @@ const AdminProductsPage = () => {
     const [dataToEdit, setDataToEdit] = useState(null);
     const [filteredProducts, setFilteredProducts] = useState(products);
     const [busqueda, setBusqueda] = useState('');
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         GetProducts();
@@ -55,7 +56,7 @@ const AdminProductsPage = () => {
     return (
         <div className='products-admin-page-container'>
             <section className='navbar-products-admin-container'>
-                <No_Transp_Navbar />
+                <No_Transp_Navbar user={user} setUser={setUser} />
             </section>
             <section className='form-search-products-admin-container'>
                 <section className='form-products-admin-container'>

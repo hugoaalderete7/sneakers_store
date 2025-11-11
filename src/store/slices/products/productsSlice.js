@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createProduct, readProducts, readProduct, updateProducts, deleteProduct } from "./productsThunks";
+import { createProduct, readProducts, readProduct, updateProducts, deleteProduct, listSameNameSexColorProducts } from "./productsThunks";
 
 
 const initialStateProducts = {
     products: [],
     product: {},
+    sameNameSexColorProducts: [],
     loading: false,
     error: null,
 };
@@ -13,7 +14,7 @@ const initialStateProducts = {
 export const productsSlice = createSlice({
     name: "products",
     initialState: initialStateProducts,
-    reducers: { 
+    reducers: {
         readProduct: (state, action) => {
             state.product = action.payload;
         }
@@ -47,7 +48,7 @@ export const productsSlice = createSlice({
             })
         builder
             .addCase(updateProducts.pending, (state) => {
-                state.loading = true;    
+                state.loading = true;
                 state.error = null;
             })
             .addCase(updateProducts.fulfilled, (state, action) => {
@@ -73,6 +74,19 @@ export const productsSlice = createSlice({
             .addCase(deleteProduct.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            });
+        builder
+            .addCase(listSameNameSexColorProducts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(listSameNameSexColorProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.sameNameSexColorProducts = action.payload; // Actualiza el estado con los productos procesados
+            })
+            .addCase(listSameNameSexColorProducts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload; // Maneja el error si la acción falla
             });
     }
 });

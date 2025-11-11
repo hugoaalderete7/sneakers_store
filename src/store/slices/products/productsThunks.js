@@ -66,3 +66,40 @@ export const deleteProduct = createAsyncThunk(
         }
     }
 );
+
+// Listado de productos sin repetir (por nombre, sexo y color):
+export const listSameNameSexColorProducts = createAsyncThunk(
+    "products/listSameNameSexColorProducts",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get("http://localhost:4000/api/products");
+            const products = response.data;
+            const uniqueProducts = products.reduce((acc, product) => {
+                // Buscar si ya existe un producto con el mismo `name`, `sex` y `color` en el acumulador
+                const existingProduct = acc.find(
+                    (p) =>
+                        p.name === product.name &&
+                        p.sex === product.sex &&
+                        p.color === product.color
+                );
+
+                if (existingProduct) {
+                    // Si ya existe, agregar `size` y `color` al array, permitiendo duplicados
+                    existingProduct.size = [...existingProduct.size, product.size];
+                    existingProduct.cantIngr = [...existingProduct.cantIngr, product.cantIngr];
+                } else {
+                    // Si no existe, agregar el producto al acumulador
+                    acc.push({
+                        ...product,
+                        size: [product.size], // Convertir `size` en un array
+                        cantIngr: [product.cantIngr], // Convertir `cantIngr` en un array
+                    });
+                }
+                return acc;
+            }, []); // Inicializa el acumulador como un array vacío
+            return uniqueProducts;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);

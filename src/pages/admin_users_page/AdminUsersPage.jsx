@@ -9,10 +9,11 @@ import Searcher from '../../components/searcher/Searcher';
 const AdminUsersPage = () => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users);
-    const user = useSelector(state => state.auth.user);
+    //const user = useSelector(state => state.auth.user);
     const [dataToEdit, setDataToEdit] = useState(null);
     const [filteredUsers, setFilteredUsers] = useState(users);
     const [busqueda, setBusqueda] = useState('');
+    const [user, setUser] = useState(null);
 
     async function fetchUsers() {
         dispatch(readUsers());
@@ -44,7 +45,7 @@ const AdminUsersPage = () => {
     return (
         <div className='users-admin-page-container'>
             <section className='navbar-users-admin-container'>
-                <No_Transp_Navbar />
+                <No_Transp_Navbar user={user} setUser={setUser} />
             </section>
 
             <section className='form-search-users-admin-container'>

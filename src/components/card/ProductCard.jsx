@@ -28,7 +28,9 @@ const ProductCard = ({ el }) => {
 
     return (
         <div >
-            <img className='image-card' src={el.image} />
+            <section className='image-card-container'>
+                <img className='image-card' src={el.image} />
+            </section>
             <section className='price-button-container'>
                 <h3 className='price-card'>{formatter.format(el.price)}</h3>
                 <button className='button-card' onClick={() => handleReadProduct(el)}>Ver Mas</button>
