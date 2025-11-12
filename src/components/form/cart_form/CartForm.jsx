@@ -27,7 +27,7 @@ const CartForm = () => {
 
     return (
         <div>
-            <h2 className='products-h2'>Debes seleccionar Talle, Color y Cantidad:</h2>
+            <h2 className='products-h2'>Debes seleccionar Talle (ver en "Disponibles") y Cantidad:</h2>
 
             <form className='products-form-container'>
 
@@ -132,7 +132,7 @@ const CartForm = () => {
                         name='color'
                         onChange={handleChangeCart}
                         onBlur={handleBlurCart}
-                        value={form.color || ''}
+                        value={product.color || ''}
                     >
                         <option value="">---</option>
                         <option value="blanco">Blanco</option>

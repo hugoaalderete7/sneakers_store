@@ -34,13 +34,13 @@ const ProductsPage = () => {
                 </section>
                 <section className='card-container'>
                     {productsShow.length !== 0 ?
-                        productsShow.map((product) => (
+                        productsShow?.map((product) => (
                             <div className='card'>
                                 <ProductCard key={product.id} el={product} />
                             </div>
                         ))
                         :
-                        sameNameSexColorProducts.map((product) => (
+                        sameNameSexColorProducts?.map((product) => (
                             <div className='card'>
                                 <ProductCard key={product.id} el={product} />
                             </div>

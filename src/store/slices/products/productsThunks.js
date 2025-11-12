@@ -74,7 +74,14 @@ export const listSameNameSexColorProducts = createAsyncThunk(
         try {
             const response = await axios.get("http://localhost:4000/api/products");
             const products = response.data;
+
+            const allSizes = [36, 37, 38, 39, 40, 41, 42]; // Rango de talles
+
             const uniqueProducts = products.reduce((acc, product) => {
+                // Asegurarse de que `size` y `cantIngr` sean arrays
+                const sizes = Array.isArray(product.size) ? product.size : [product.size];
+                const quantities = Array.isArray(product.cantIngr) ? product.cantIngr : [product.cantIngr];
+
                 // Buscar si ya existe un producto con el mismo `name`, `sex` y `color` en el acumulador
                 const existingProduct = acc.find(
                     (p) =>
@@ -84,19 +91,38 @@ export const listSameNameSexColorProducts = createAsyncThunk(
                 );
 
                 if (existingProduct) {
-                    // Si ya existe, agregar `size` y `color` al array, permitiendo duplicados
-                    existingProduct.size = [...existingProduct.size, product.size];
-                    existingProduct.cantIngr = [...existingProduct.cantIngr, product.cantIngr];
+                    // Si ya existe, combinar los talles y cantidades en el objeto `stock`
+                    sizes.forEach((size, index) => {
+                        existingProduct.stock[size] =
+                            (existingProduct.stock[size] || 0) + quantities[index];
+                    });
                 } else {
-                    // Si no existe, agregar el producto al acumulador
+                    // Si no existe, inicializar el objeto `stock` con todos los talles en 0
+                    const stock = allSizes.reduce((stockAcc, size) => {
+                        stockAcc[size] = 0; // Inicializar todos los talles con 0
+                        return stockAcc;
+                    }, {});
+
+                    // Actualizar el objeto `stock` con los talles y cantidades del producto actual
+                    sizes.forEach((size, index) => {
+                        stock[size] = quantities[index];
+                    });
+
                     acc.push({
                         ...product,
-                        size: [product.size], // Convertir `size` en un array
-                        cantIngr: [product.cantIngr], // Convertir `cantIngr` en un array
+                        stock, // Nueva propiedad `stock` con todos los talles
                     });
                 }
+
                 return acc;
             }, []); // Inicializa el acumulador como un array vacío
+
+            // Eliminar las propiedades `size` y `cantIngr` de los productos en `uniqueProducts`
+            uniqueProducts.forEach((product) => {
+                delete product.size;
+                delete product.cantIngr;
+            });
+
             return uniqueProducts;
         } catch (error) {
             return rejectWithValue(error.response.data);

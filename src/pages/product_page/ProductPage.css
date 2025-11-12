@@ -1,7 +1,15 @@
+/* Ajuste para eliminar el scroll vertical */
+html, body {
+    height: 100%;
+    overflow: hidden; /* Elimina el scroll vertical */
+}
+
 .product-page-grid-container {
     display: grid;
     grid-template-rows: auto 1fr;
-    width: 100vw;
+    width: 100%; /* Cambiado de 100vw a 100% para evitar problemas con el viewport */
+    overflow: hidden; /* Asegura que no haya desbordamiento */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura del viewport */
 }
 
 .product-form-container {
@@ -9,12 +17,14 @@
     grid-template-columns: 1fr 1fr;
 }
 
-.image-name-price-container {
+.image-name-price-size-container {
     margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .form-container {
@@ -22,10 +32,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
 }
 
 .image-container {
     position: absolute;
+}
+
+.product-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
 .name-price-container {
@@ -33,7 +50,7 @@
     display: flex;
     justify-content: space-around;
     width: 30%;
-    top: 325px;
+    top: 250px;
 }
 
 .product-name {
@@ -44,13 +61,56 @@
     font-weight: bold;
 }
 
+.sizes-container {
+    position: absolute;
+    top: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.title-container {
+    margin-bottom: 10px;
+}
+
+.title-container h3 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.sizes-grid-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.sizes-grid-container h4 {
+    text-align: center;
+    font-weight: bold;
+}
+
 .go-container{
     position: absolute;
-    top: 380px;
+    top: 420px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .go-products-page{
     font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
+}
+
+/* Aseguramos que los elementos absolutos no causen desbordamiento */
+.image-name-price-size-container, .sizes-container, .go-container {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Ajustes generales para evitar desbordamientos */
+* {
+    box-sizing: border-box; /* Incluye padding y bordes en el tamaño total de los elementos */
 }
