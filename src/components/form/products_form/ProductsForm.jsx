@@ -3,6 +3,7 @@ import UseForm from '../../../hooks/useForm';
 import "./ProductsForm.css";
 import { useDispatch } from 'react-redux';
 import { createProduct, updateProducts } from '../../../store/slices/products/productsThunks';
+import './ProductsForm.css';
 
 
 let styles = {
@@ -31,15 +32,15 @@ const ProductsForm = ({ dataToEdit, setDataToEdit }) => {
             }
 
             if (!form._id) {
-            if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
-                dispatch(createProduct(form));
-                alert("Producto creado con éxito !!");
-                setForm(initialForm);
-                setErrors(initialErrors);
-            }
-            else {
-                alert('Debes completar correctamente todos los campos !!');
-            }
+                if (JSON.stringify(errors) === JSON.stringify(initialErrors)) {
+                    dispatch(createProduct(form));
+                    alert("Producto creado con éxito !!");
+                    setForm(initialForm);
+                    setErrors(initialErrors);
+                }
+                else {
+                    alert('Debes completar correctamente todos los campos !!');
+                }
             } else {
                 dispatch(updateProducts(form));
                 alert("Producto actualizado con éxito !!");
@@ -216,7 +217,7 @@ const ProductsForm = ({ dataToEdit, setDataToEdit }) => {
                 </section>
                 <section className='products-section-grid-item'>
                     <button className="products-form-button" onClick={handleSubmit}>
-                        {dataToEdit? 'Actualizar' : 'Ingresar'}
+                        {dataToEdit ? 'Actualizar' : 'Ingresar'}
                     </button>
                     <button className="products-form-button" onClick={handleClear} type='button'>
                         Limpiar

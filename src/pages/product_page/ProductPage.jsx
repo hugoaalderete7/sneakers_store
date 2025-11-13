@@ -58,13 +58,13 @@ const ProductPage = () => {
                                 <h4>41</h4>
                                 <h4>42</h4>
                                 <h4>Stock</h4>
-                                <h4>{sizes[36]==0?"-":sizes[36]}</h4>
-                                <h4>{sizes[37]==0?"-":sizes[37]}</h4>
-                                <h4>{sizes[38]==0?"-":sizes[38]}</h4>
-                                <h4>{sizes[39]==0?"-":sizes[39]}</h4>
-                                <h4>{sizes[40]==0?"-":sizes[40]}</h4>
-                                <h4>{sizes[41]==0?"-":sizes[41]}</h4>
-                                <h4>{sizes[42]==0?"-":sizes[42]}</h4>
+                                <h4>{sizes[36] == 0 ? "-" : sizes[36]}</h4>
+                                <h4>{sizes[37] == 0 ? "-" : sizes[37]}</h4>
+                                <h4>{sizes[38] == 0 ? "-" : sizes[38]}</h4>
+                                <h4>{sizes[39] == 0 ? "-" : sizes[39]}</h4>
+                                <h4>{sizes[40] == 0 ? "-" : sizes[40]}</h4>
+                                <h4>{sizes[41] == 0 ? "-" : sizes[41]}</h4>
+                                <h4>{sizes[42] == 0 ? "-" : sizes[42]}</h4>
                             </section>
                         </div>
                         <div className='go-container'>

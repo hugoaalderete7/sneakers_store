@@ -1,7 +1,7 @@
 /* Ajuste para eliminar el scroll vertical */
 html, body {
     height: 100%;
-    overflow: hidden; /* Elimina el scroll vertical */
+    /* overflow: hidden; Elimina el scroll vertical */
 }
 
 .product-page-grid-container {
@@ -18,39 +18,34 @@ html, body {
 }
 
 .image-name-price-size-container {
-    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
     max-width: 100%;
     overflow: hidden;
+    margin-top: 30px;
 }
 
 .form-container {
-    margin-top: 80px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-}
-
-.image-container {
-    position: absolute;
+    width: 95%;
 }
 
 .product-image {
     width: 300px;
     height: 300px;
-    object-fit: cover;
+    object-fit: contain; /* La imagen se ajusta dentro del contenedor sin recortarse */
 }
 
 .name-price-container {
     position: absolute;
+    top:330px;
     display: flex;
     justify-content: space-around;
-    width: 30%;
-    top: 250px;
+    width: 17%;
 }
 
 .product-name {
@@ -62,8 +57,6 @@ html, body {
 }
 
 .sizes-container {
-    position: absolute;
-    top: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,7 +65,8 @@ html, body {
 }
 
 .title-container {
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .title-container h3 {
@@ -92,8 +86,7 @@ html, body {
 }
 
 .go-container{
-    position: absolute;
-    top: 420px;
+  margin-top: 20px;
     max-width: 100%;
     overflow: hidden;
 }
