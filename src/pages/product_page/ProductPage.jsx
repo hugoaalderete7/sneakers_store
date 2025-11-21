@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const ProductPage = () => {
     const product = useSelector((state) => state.products.product);
-    console.log("Producto en ProductPage:", product);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
@@ -35,7 +34,15 @@ const ProductPage = () => {
                 <No_Transp_Navbar user={user} setUser={setUser} />
             </section>
             <section className='product-form-container'>
-                {product ? (
+                {Object.keys(product).length === 0 ? (
+                    <section>
+                        <h2>No hay productos seleccionados</h2>
+                        <div className='go-container'>
+                            <h4 className='go-products-page' onClick={() => navigate('/products')}>Volver</h4>
+                        </div>
+                    </section>
+
+                ) : (
                     <section className="image-name-price-size-container">
                         <div className='image-container'>
                             <img className="product-image" src={product.image} alt={product.name} />
@@ -71,8 +78,6 @@ const ProductPage = () => {
                             <h4 className='go-products-page' onClick={() => navigate('/products')}>Volver</h4>
                         </div>
                     </section>
-                ) : (
-                    <h2>No hay productos seleccionados</h2>
                 )}
 
                 <section className='form-container'>

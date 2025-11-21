@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "./Filter.css";
+import { useSelector } from 'react-redux';
 
 const Filter = ({ products, setProductsShow }) => {
+    const product = useSelector((state) => state.products.product);
     const [filters, setFilters] = useState({
         sex: null,
         brand: null,
@@ -20,6 +22,10 @@ const Filter = ({ products, setProductsShow }) => {
         }
         if (filters.sport) {
             filteredProducts = filteredProducts.filter(product => product.sport === filters.sport);
+        }
+
+        if(!product){
+            filteredProducts = products;
         }
 
         if (filteredProducts.length === 0) {

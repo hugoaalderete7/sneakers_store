@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UseForm from '../../../hooks/useForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ const CartForm = () => {
     const navigate = useNavigate();
     const { initialForm, initialErrors, form, errors, setForm, setErrors, handleChange, handleBlurCart, handleChecked, handleChangeCart } = UseForm();
     console.log("Producto en CartForm:", form);
+    console.log(product.color)
+    console.log(product._id)
 
 
     const styles = {
@@ -18,8 +20,24 @@ const CartForm = () => {
         color: "#ff0000",
     };
 
+    useEffect(() => {
+        setForm({
+            ...product,
+            size: form.size || '',
+            quantity: form.quantity
+        });
+    }, [form.size, form.quantity]);
+
     const handleSubmitCart = (e) => {
         e.preventDefault();
+        if (!form.size) {
+            alert("Debes seleccionar un Talle.");
+            return;
+        }
+        if (!form.quantity || form.quantity <= 0) {
+            alert("Debes ingresar una Cantidad válida.");
+            return;
+        }
         dispatch(createProductCart(form));
         setForm(initialForm);
         setErrors(initialErrors);
@@ -40,9 +58,9 @@ const CartForm = () => {
                         name='name'
                         type='text'
                         //placeholder='Nombre del Producto'
-                        onChange={handleChangeCart}
+                        //onChange={handleChangeCart}
                         //onBlur={handleBlurCart}
-                        value={product.name || ""}
+                        value={form.name || ""}
                     />
 
                     {/* {errors.name && <p style={styles}>{errors.name}</p>} */}
@@ -50,57 +68,60 @@ const CartForm = () => {
 
                 <section className='products-cart-section-grid-item'>
                     <label className="products-cart-label" for="sex">Sexo:</label>
-                    <select
-                    id='sex'
+                    <input
+                        id='sex'
                         className='products-cart-select'
                         name='sex'
-                        onChange={handleChangeCart}
+                        type='text'
+                        //onChange={handleChangeCart}
                         //onBlur={handleBlurCart}
-                        value={product.sex || ''}
+                        value={form.sex || ''}
                     >
-                        <option value="">---</option>
+                        {/* <option value="">---</option>
                         <option value="Hombre">Hombre</option>
-                        <option value="Mujer">Mujer</option>
-                    </select>
+                        <option value="Mujer">Mujer</option> */}
+                    </input>
 
                     {/* {errors.sex && <p style={styles}>{errors.sex}</p>} */}
                 </section>
 
                 <section className='products-cart-section-grid-item'>
                     <label className="products-cart-label" for="brand">Marca:</label>
-                    <select
-                    id='brand'
+                    <input
+                        id='brand'
                         className='products-cart-select'
                         name='brand'
-                        onChange={handleChangeCart}
+                        type='text'
+                        //onChange={handleChangeCart}
                         //onBlur={handleBlurCart}
-                        value={product.brand || ''}
+                        value={form.brand || ''}
                     >
-                        <option value="">---</option>
+                        {/* <option value="">---</option>
                         <option value="adidas">Adidas</option>
                         <option value="nike">Nike</option>
                         <option value="fila">Fila</option>
-                        <option value="puma">Puma</option>
-                    </select>
+                        <option value="puma">Puma</option> */}
+                    </input>
 
                     {/* {errors.brand && <p style={styles}>{errors.brand}</p>} */}
                 </section>
 
                 <section className='products-cart-section-grid-item'>
                     <label className="products-cart-label" for="sport">Disciplina:</label>
-                    <select
-                    id='sport'
+                    <input
+                        id='sport'
                         className='products-cart-select'
                         name='sport'
-                        onChange={handleChangeCart}
+                        type='text'
+                        //onChange={handleChangeCart}
                         //onBlur={handleBlurCart}
-                        value={product.sport || ''}
+                        value={form.sport || ''}
                     >
-                        <option value="">---</option>
+                        {/* <option value="">---</option>
                         <option value="running">Running</option>
                         <option value="trekking">Trekking</option>
-                        <option value="trainning">Trainning</option>
-                    </select>
+                        <option value="trainning">Trainning</option> */}
+                    </input>
 
                     {/* {errors.sport && <p style={styles}>{errors.sport}</p>} */}
                 </section>
@@ -127,29 +148,6 @@ const CartForm = () => {
                 </section>
 
                 <section className='products-cart-section-grid-item'>
-                    <label className="products-cart-label" for="color">Color:</label>
-                    <select
-                        className='products-cart-select'
-                        name='color'
-                        onChange={handleChangeCart}
-                        onBlur={handleBlurCart}
-                        value={product.color || ''}
-                    >
-                        <option value="">---</option>
-                        <option value="blanco">Blanco</option>
-                        <option value="negro">Negro</option>
-                        <option value="gris">Gris</option>
-                        <option value="azul">Azul</option>
-                        <option value="verde">Verde</option>
-                        <option value="rojo">Rojo</option>
-                        <option value="natural">Natural</option>
-                        <option value="combinado">Combinado</option>
-                    </select>
-
-                    {errors.color && <p style={styles}>{errors.color}</p>}
-                </section>
-
-                <section className='products-cart-section-grid-item'>
                     <label className="products-cart-label" for="cantIngr">Cantidad:</label>
                     <input
                         className="products-cart-input"
@@ -165,16 +163,41 @@ const CartForm = () => {
                 </section>
 
                 <section className='products-cart-section-grid-item'>
+                    <label className="products-cart-label" for="color">Color:</label>
+                    <input
+                        id='color'
+                        className='products-cart-select'
+                        name='color'
+                        type='text'
+                        //onChange={handleChangeCart}
+                        // onBlur={handleBlurCart}
+                        value={form.color || ''}
+                    >
+                        {/* <option value="">---</option>
+                        <option value="blanco">Blanco</option>
+                        <option value="negro">Negro</option>
+                        <option value="gris">Gris</option>
+                        <option value="azul">Azul</option>
+                        <option value="verde">Verde</option>
+                        <option value="rojo">Rojo</option>
+                        <option value="natural">Natural</option>
+                        <option value="combinado">Combinado</option> */}
+                    </input>
+
+                    {/* {errors.color && <p style={styles}>{errors.color}</p>} */}
+                </section>
+
+                <section className='products-cart-section-grid-item'>
                     <label className="products-cart-label" for="price">Precio:</label>
                     <input
-                    id='price'
+                        id='price'
                         className="products-cart-input"
                         name='price'
                         type='number'
                         //placeholder='Precio'
-                        onChange={handleChangeCart}
+                        //onChange={handleChangeCart}
                         //onBlur={handleBlurCart}
-                        value={product.price || ''}
+                        value={form.price || ''}
                     />
 
                     {/* {errors.price && <p style={styles}>{errors.price}</p>} */}
@@ -183,20 +206,20 @@ const CartForm = () => {
                 <section className='products-cart-section-grid-item'>
                     <label className="products-cart-label" for="image">Imagen:</label>
                     <input
-                    id='image'
+                        id='image'
                         className="products-cart-input"
                         name='image'
                         type='text'
                         //placeholder='Imagen del Producto'
-                        onChange={handleChangeCart}
+                        //onChange={handleChangeCart}
                         //onBlur={handleBlurCart}
-                        value={product.image || ''}
+                        value={form.image || ''}
                     />
 
                     {/* {errors.image && <p style={styles}>{errors.image}</p>} */}
                 </section>
                 <section className='products-cart-section-grid-item-button'>
-                    <button type= "button" className="products-cart-form-button" onClick={handleSubmitCart}>Agregar al Carrito</button>
+                    <button type="button" className="products-cart-form-button" onClick={handleSubmitCart}>Agregar al Carrito</button>
                 </section>
 
             </form>

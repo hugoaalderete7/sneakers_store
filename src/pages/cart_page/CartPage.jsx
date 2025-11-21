@@ -1,14 +1,31 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import No_Transp_Navbar from '../../components/navbar/No_Transp_Navbar';
 import "./CartPage.css";
+import { deleteAllCart, deleteOne } from '../../store/slices/cart/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
     const cart = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
     const [user, setUser] = useState(null);
-    
+    const navigate = useNavigate();
+
     console.log(cart.cart);
     console.log(cart.quantity)
+
+    let formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0
+    })
+
+    const totalPurchase = cart.cart.reduce((total, product) => total + (product.price * product.quantity), 0);
+
+    const goProductPage = () => {
+        navigate("/product");
+    }
 
     return (
         <div>
@@ -18,13 +35,13 @@ const CartPage = () => {
                 </section>
                 <section className='products-cart-container'>
                     <section className='total-cart'>
-                        <h3 style={{textDecoration: 'underline'}}>DETALLE DE TU SELECCIÓN:</h3>
-                        <h3>Total: $100000</h3>
+                        <h3 style={{ textDecoration: 'underline' }}>DETALLE DE TU SELECCIÓN:</h3>
+                        <h3>Total: {formatter.format(totalPurchase)}</h3>
                         <h3>Comprar</h3>
-                        <h3>Vaciar el carrito</h3>
-                        <h3>Volver</h3>
+                        <h3 onClick={() => dispatch(deleteAllCart())} style={{ cursor: 'pointer', textDecoration: 'underline' }}>Vaciar el carrito</h3>
+                        <h3 onClick={() => goProductPage()} style={{ cursor: 'pointer', textDecoration: 'underline' }}>Volver</h3>
                     </section>
-                    <section style={{marginTop: '70px', width:'100%'}}>
+                    <section style={{ marginTop: '70px', width: '100%' }}>
                         {cart.cart.map((product) => (
                             <section className='li-container'>
                                 <img src={product.image} style={{ width: '6vw' }} />
@@ -34,7 +51,7 @@ const CartPage = () => {
                                 <section><h4>Precio</h4>{product.price}</section>
                                 <section><h4>Cantidad</h4>{product.quantity}</section>
                                 <section><h4>Parcial</h4>{product.quantity * product.price}</section>
-                                <button>Eliminar uno</button>
+                                <button onClick={() => dispatch(deleteOne(product._id))}>Eliminar uno</button>
                                 <button>Eliminar todos</button>
                             </section>
                         )

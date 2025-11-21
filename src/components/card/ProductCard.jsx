@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const ProductCard = ({ el }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    console.log("Producto en ProductCard:", el);
 
     let formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
