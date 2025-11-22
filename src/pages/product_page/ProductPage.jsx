@@ -81,7 +81,7 @@ const ProductPage = () => {
                 )}
 
                 <section className='form-container'>
-                    <CartForm />
+                    <CartForm sizes={sizes} />
                 </section>
             </section>
         </div>

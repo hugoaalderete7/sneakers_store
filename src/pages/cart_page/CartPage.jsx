@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import No_Transp_Navbar from '../../components/navbar/No_Transp_Navbar';
 import "./CartPage.css";
-import { deleteAllCart, deleteOne } from '../../store/slices/cart/cartSlice';
+import { deleteAllCart, deleteOne, deleteOneAll } from '../../store/slices/cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
@@ -37,7 +37,7 @@ const CartPage = () => {
                     <section className='total-cart'>
                         <h3 style={{ textDecoration: 'underline' }}>DETALLE DE TU SELECCIÓN:</h3>
                         <h3>Total: {formatter.format(totalPurchase)}</h3>
-                        <h3>Comprar</h3>
+                        <h3 style={{ cursor: 'pointer', textDecoration: 'underline' }}>Comprar</h3>
                         <h3 onClick={() => dispatch(deleteAllCart())} style={{ cursor: 'pointer', textDecoration: 'underline' }}>Vaciar el carrito</h3>
                         <h3 onClick={() => goProductPage()} style={{ cursor: 'pointer', textDecoration: 'underline' }}>Volver</h3>
                     </section>
@@ -52,7 +52,7 @@ const CartPage = () => {
                                 <section><h4>Cantidad</h4>{product.quantity}</section>
                                 <section><h4>Parcial</h4>{product.quantity * product.price}</section>
                                 <button onClick={() => dispatch(deleteOne(product._id))}>Eliminar uno</button>
-                                <button>Eliminar todos</button>
+                                <button onClick={() => dispatch(deleteOneAll(product._id))}>Eliminar todos</button>
                             </section>
                         )
                         )}
