@@ -9,6 +9,7 @@ import ProductsPage from '../../pages/products_page/ProductsPage';
 import AdminProductsPage from '../../pages/admin_products_page/AdminProductsPage';
 import ProductPage from '../../pages/product_page/ProductPage';
 import CartPage from '../../pages/cart_page/CartPage';
+import AdminShoppingPage from '../../pages/admin_shopping_page/AdminShoppingPage';
 
 const AppRoutes = () => {
     return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/product" element={<ProductPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/admin-shopping" element={<AdminShoppingPage />} />
 
                 <Route path="*" element={<ErrorPage />} />
             </Routes>

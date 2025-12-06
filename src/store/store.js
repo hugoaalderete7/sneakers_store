@@ -3,6 +3,7 @@ import { usersSlice } from "./slices/users/usersSlice";
 import { authSlice } from "./slices/auth/authSlice";
 import { productsSlice } from "./slices/products/productsSlice";
 import { cartSlice } from "./slices/cart/cartSlice";
+import { invoicesSlice } from "./slices/invoice/invoiceSlice";
 
 
 export const store = configureStore ({
@@ -11,5 +12,6 @@ export const store = configureStore ({
         auth: authSlice.reducer,
         products: productsSlice.reducer,
         cart: cartSlice.reducer,
+        invoices: invoicesSlice.reducer,
     }
 });
