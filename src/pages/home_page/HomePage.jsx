@@ -8,6 +8,8 @@ const HomePage = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
+    console.log(user);
+
     return (
         <div className='global_container'>
             <article>

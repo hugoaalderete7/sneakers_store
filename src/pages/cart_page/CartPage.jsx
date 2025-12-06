@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import No_Transp_Navbar from '../../components/navbar/No_Transp_Navbar';
 import "./CartPage.css";
 import { deleteAllCart, deleteOne, deleteOneAll } from '../../store/slices/cart/cartSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ShoppingForm from '../../components/form/shopping_form/ShoppingForm';
 
 const CartPage = () => {
     const cart = useSelector((state) => state.cart);
+    const flag = cart.cart.length === 0 ? true : false;
+    const token = localStorage.getItem("token");
     const dispatch = useDispatch();
     const [user, setUser] = useState(null);
+    const [userShop, setUserShop] = useState(null);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const parseUser = token ? JSON.parse(token).usuario : null;
+        setUserShop(parseUser);
+    }, []);
 
     console.log(cart.cart);
     console.log(cart.quantity)
+    console.log(userShop?.name);
 
     let formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -25,6 +35,10 @@ const CartPage = () => {
 
     const goProductPage = () => {
         navigate("/product");
+    }
+
+    const goCart = () => {
+        navigate("/cart");
     }
 
     return (
@@ -56,6 +70,13 @@ const CartPage = () => {
                             </section>
                         )
                         )}
+                    </section>
+                    <section>
+                        {flag == false &&
+                            <article>
+                                <ShoppingForm stateCart={cart.cart} goCart={goCart} totalPurchase={totalPurchase} userShop={userShop} />
+                            </article>
+                        }
                     </section>
                 </section>
             </article>

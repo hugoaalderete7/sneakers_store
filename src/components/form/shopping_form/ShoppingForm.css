@@ -1,0 +1,63 @@
+.shoppingForm-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.check-shipping-ends-container {
+    width: calc(100%/3);
+    display: flex;
+    justify-content: center;
+}
+
+.check-shipping-ends-inputs-button {
+    width: 80%;
+    text-align: center;
+    border-radius: 20px;
+    /* background-color: #000; */
+}
+
+.check-shipping-ends-inputs-button h2 {
+    padding: 10px;
+    margin: 10px;
+    /* color: #fff; */
+}
+
+.check-shipping-ends-inputs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.check-shipping-ends-label-inputs{
+    display: flex;
+}
+
+.check-shipping-ends-inputs label {
+    /* color: #fff; */
+    font-weight: bold;
+    display: block;
+}
+
+.check-shipping-ends-inputs .input {
+    padding: 10px 5px;
+    border: none;
+    border-radius: 10px;
+    margin: 8px;
+    text-align: center;
+    font-weight: bold;
+    background-color: lightgray;
+}
+
+.check-shipping-ends-button {
+    margin: 20px;
+}
+
+.check-shipping-ends-button button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    width: 20%;
+    background-color: lightgray;
+    font-weight: bold;
+}
