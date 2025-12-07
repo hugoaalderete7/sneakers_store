@@ -2,11 +2,18 @@ import React from 'react';
 import "./Searcher.css"
 
 
-const Searcher = ({ elements, setFiltered, busqueda, setBusqueda, products }) => {
+const Searcher = ({ elements, setFiltered, busqueda, setBusqueda, products, invoices }) => {
 
     const handleChange = e => {
         setBusqueda(e.target.value)
-        elements == products ? filtrarProducts(e.target.value) : filtrarUsers(e.target.value)
+        if (elements == products) {
+            filtrarProducts(e.target.value)
+        } else if (elements == invoices) {
+            filtrarInvoices(e.target.value)
+        } else {
+            filtrarUsers(e.target.value)
+        }
+        //elements == products ? filtrarProducts(e.target.value) : filtrarUsers(e.target.value)
     }
 
     const filtrarProducts = (terminoBusqueda) => {
@@ -26,6 +33,17 @@ const Searcher = ({ elements, setFiltered, busqueda, setBusqueda, products }) =>
             if (elemento.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
                 || elemento.lastname.toLowerCase().includes(terminoBusqueda.toLowerCase())
                 || elemento.email.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+                return elemento;
+            }
+        });
+        setFiltered(response);
+    }
+
+    const filtrarInvoices = (terminoBusqueda) => {
+        var response = elements.filter((elemento) => {
+            if (elemento.userName.toLowerCase().includes(terminoBusqueda.toLowerCase())
+                || elemento.lastname.toLowerCase().includes(terminoBusqueda.toLowerCase())
+                || elemento.card.toLowerCase().includes(terminoBusqueda.toLowerCase())) {
                 return elemento;
             }
         });

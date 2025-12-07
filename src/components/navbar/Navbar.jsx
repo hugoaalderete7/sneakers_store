@@ -37,6 +37,11 @@ const Navbar = ({ user, setUser }) => {
                         <NavLink to="/admin-products" className={({ isActive }) => isActive ? "active" : "no_active"}>Admin_Productos</NavLink>
                     </li>
                 )}
+                {user && user.admin === 'true' && (
+                    <li className='nav_li'>
+                        <NavLink to="/admin-shopping" className={({ isActive }) => isActive ? "active" : "no_active"}>Admin_Facturas</NavLink>
+                    </li>
+                )}
                 <li className='nav_li'>
                     <NavLink
                         to="/cart"
