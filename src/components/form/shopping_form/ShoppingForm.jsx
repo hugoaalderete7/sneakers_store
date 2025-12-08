@@ -28,7 +28,6 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
         validationShoppingForm
     } = useShoppingForm();
 
-    console.log(shoppingForm)
 
     async function handleSubmitShoppingForm(e) {
         e.preventDefault();
@@ -39,7 +38,47 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
             if (Object.keys(errors).length !== 0) {
                 alert('Debes completar correctamente todos los campos !!');
             } else {
-                const response = await axios.post("http://localhost:4000/api/shopping", shoppingForm);
+                // Me aseguro que totalAmount y los shoppingForm.price sean una cadena antes de usar .replace
+                const totalAmount_AsString = String(shoppingForm.totalAmount || ''); // Convierte a cadena 
+                const price1_AsString = String(shoppingForm.price1 || ''); // Convierte a cadena 
+                const price2_AsString = String(shoppingForm.price2 || ''); // Convierte a cadena 
+                const price3_AsString = String(shoppingForm.price3 || ''); // Convierte a cadena 
+                // Convertir totalAmount y los precios formateados a un número
+                const cleanTotalAmount = parseFloat(totalAmount_AsString.replace(/[^0-9.]/g, ''));
+                const cleanPrice1 = parseFloat(price1_AsString?.replace(/[^0-9.]/g, ''));
+                const cleanPrice2 = price2_AsString? parseFloat(price2_AsString?.replace(/[^0-9.]/g, '')) : "";
+                const cleanPrice3 = price3_AsString? parseFloat(price3_AsString?.replace(/[^0-9.]/g, '')) : "";
+
+                if (isNaN(cleanTotalAmount)) {
+                    alert("El monto total ingresado no es válido.");
+                    return;
+                }
+
+                if (isNaN(cleanPrice1)) {
+                    alert("El precio 1 ingresado no es válido.");
+                    return;
+                }
+                if (isNaN(cleanPrice2)) {
+                    alert("El precio 2 ingresado no es válido.");
+                    return;
+                }
+                if (isNaN(cleanPrice3)) {
+                    alert("El precio 3 ingresado no es válido.");
+                    return;
+                }
+
+                // Guardar los números limpios en el formulario
+                const shoppingFormToSubmit = {
+                    ...shoppingForm,
+                    totalAmount: cleanTotalAmount, // Asegurarte de enviar el número
+                    price1: cleanPrice1, // Asegurarte de enviar el número
+                    price2: cleanPrice2, // Asegurarte de enviar el número
+                    price3: cleanPrice3, // Asegurarte de enviar el número
+                };
+
+                console.log(shoppingFormToSubmit);
+
+                const response = await axios.post("http://localhost:4000/api/shopping", shoppingFormToSubmit);
                 console.log(response);
                 alert("La compra se realizó de manera exitosa !!");
             }
@@ -54,10 +93,7 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
         }
     }
 
-
-
     const [position, setPosition] = useState(0);
-
 
     function changeForm(e) {
         e.preventDefault();
@@ -69,8 +105,6 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
             setPosition(-66.66);
         }
     }
-
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -120,21 +154,15 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
             size2: size2 ? size2.value : "",
             size3: size3 ? size3.value : "",
         });
-
-        console.log(shoppingForm)
     }
-
 
     const handleBlur = (e) => {
         handleChange(e);
         setErrors(validationShoppingForm(shoppingForm));
     }
 
-
-
     return (
         <div className='shoppingForm-container'>
-
             <form style={
                 {
                     width: "300%",
@@ -146,9 +174,7 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
                     transform: `translateX(${position}%)`,
                 }
             }>
-
                 {/* ---------- VERIFICA TUS PRODUCTOS ------------- */}
-
                 <section className="check-shipping-ends-container">
                     <section className="check-shipping-ends-inputs-button">
                         <h2>Verifica tus Productos:</h2>
@@ -183,10 +209,10 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
                                     <input
                                         className="input price1"
                                         name='price'
-                                        type='number'
+                                        type='text'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={stateCart.length !== 0 ? stateCart[0].price : ""}
+                                        value={stateCart.length !== 0 ? formatter.format(stateCart[0].price) : ""}
                                     />
                                     {errors.price && <p style={styles}>{errors.price}</p>}
                                 </div>
@@ -260,10 +286,10 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
                                         <input
                                             className="input price2"
                                             name='price'
-                                            type='number'
+                                            type='text'
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            value={stateCart[1].price}
+                                            value={formatter.format(stateCart[1].price)}
                                         />
                                         {errors.price && <p style={styles}>{errors.price}</p>}
                                     </div>
@@ -338,10 +364,10 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
                                         <input
                                             className="input price3"
                                             name='price'
-                                            type='number'
+                                            type='text'
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            value={stateCart[2].price}
+                                            value={formatter.format(stateCart[2].price)}
                                         />
                                         {errors.price && <p style={styles}>{errors.price}</p>}
                                     </div>
@@ -502,10 +528,10 @@ const ShoppingForm = ({ stateCart, goCart, userShop, totalPurchase }) => {
                                 <input
                                     className="input totalAmount"
                                     name='totalAmount'
-                                    type='number'
+                                    type='text'
                                     onChange={handleChange}
                                     // onBlur={handleBlur}
-                                    value={totalPurchase}
+                                    value={formatter.format(totalPurchase)}
                                 />
                                 {errors.totalAmount && <p style={styles}>{errors.totalAmount}</p>}
                             </div>

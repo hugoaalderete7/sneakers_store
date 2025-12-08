@@ -9,6 +9,7 @@ const Navbar = ({ user, setUser }) => {
     const dispatch = useDispatch();
     const authState = useSelector((state) => state.auth);
     const token = localStorage.getItem("token");
+    const badge = useSelector((state) => state.cart.quantity);
 
     useEffect(() => {
         const parseUser = token ? JSON.parse(token).usuario : null;
@@ -53,7 +54,12 @@ const Navbar = ({ user, setUser }) => {
                             }
                         }}
                     >
-                        Carrito
+                        <div className='cart-badge-container'>
+                            <div>Carrito</div>
+                            {badge > 0 &&
+                                <div className='cart-badge'>{badge}</div>
+                            }
+                        </div>
                     </NavLink>
                 </li>
                 <li className='nav_li'>

@@ -33,13 +33,39 @@
     color: #bbb;
 }
 
-.no_active{
+.no_active {
     color: #626060;
 }
 
 .no_active:hover {
     color: #bbb;
 }
+
+.cart-badge-container {
+    position: relative;
+    display: inline-block;
+    font-family: inherit;
+    /* Hereda la fuente del enlace */
+    font-weight: inherit;
+    /* Hereda el grosor de la fuente */
+    display: flex;
+    align-items: center;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    text-align: center;
+}
+
 
 @media only screen and (max-width: 500px) {
 

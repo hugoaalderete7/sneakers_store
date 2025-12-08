@@ -62,9 +62,9 @@ const CartPage = () => {
                                 <section><h4>Nombre</h4>{product.name}</section>
                                 <section><h4>Color</h4>{product.color}</section>
                                 <section><h4>Talle</h4>{product.size}</section>
-                                <section><h4>Precio</h4>{product.price}</section>
+                                <section><h4>Precio</h4>{formatter.format(product.price)}</section>
                                 <section><h4>Cantidad</h4>{product.quantity}</section>
-                                <section><h4>Parcial</h4>{product.quantity * product.price}</section>
+                                <section><h4>Parcial</h4>{formatter.format(product.quantity * product.price)}</section>
                                 <button onClick={() => dispatch(deleteOne(product._id))}>Eliminar uno</button>
                                 <button onClick={() => dispatch(deleteOneAll(product._id))}>Eliminar todos</button>
                             </section>

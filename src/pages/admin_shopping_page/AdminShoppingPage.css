@@ -1,0 +1,37 @@
+.shopping-admin-page-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.navbar-shopping-admin-container {
+    width: 100vw;
+    height: 8vh;
+    position: fixed;
+    background-color: #dbd6d6;
+}
+
+.search-shopping-admin-container {
+    width: 100vw;
+    margin-top: 27vh;
+}
+
+.search-shopping-admin {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.info-shopping-admin {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.info-shopping-admin h4 {
+    margin: auto;
+    padding: 10px;
+}
+
+.info-shopping-admin button {
+    margin: auto;
+    padding: 5px;
+}

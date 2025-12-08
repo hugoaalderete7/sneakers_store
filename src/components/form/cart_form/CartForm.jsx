@@ -10,6 +10,13 @@ const CartForm = ({ sizes }) => {
     const dispatch = useDispatch();
     const { initialForm, initialErrors, form, errors, setForm, setErrors, handleBlurCart, handleChangeCart } = UseForm();
 
+    let formatter = new Intl.NumberFormat('eng-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0
+    });
+
     const styles = {
         fontWeight: "bold",
         color: "#ff0000",
@@ -37,7 +44,24 @@ const CartForm = ({ sizes }) => {
             alert("La cantidad ingresada supera el stock disponible para el talle seleccionado.");
             return;
         }
-        dispatch(createProductCart(form));
+
+        // Asegúrate de que form.price sea una cadena antes de usar .replace
+        const priceAsString = String(form.price || ''); // Convierte a cadena 
+        // Convertir el precio formateado a un número
+        const cleanPrice = parseFloat(priceAsString.replace(/[^0-9.]/g, ''));
+
+        if (isNaN(cleanPrice)) {
+            alert("El precio ingresado no es válido.");
+            return;
+        }
+
+        // Guardar el número limpio en el formulario
+        const formToSubmit = {
+            ...form,
+            price: cleanPrice, // Asegurarte de enviar el número
+        };
+
+        dispatch(createProductCart(formToSubmit));
         setForm(initialForm);
         setErrors(initialErrors);
     }
@@ -135,8 +159,8 @@ const CartForm = ({ sizes }) => {
                         id='price'
                         className="products-cart-input"
                         name='price'
-                        type='number'
-                        value={form.price || ''}
+                        type='text'
+                        value={formatter.format(form.price) || ''}
                     />
                 </section>
                 <section className='products-cart-section-grid-item'>

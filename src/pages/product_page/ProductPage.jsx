@@ -10,6 +10,13 @@ const ProductPage = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
+    let formatter = new Intl.NumberFormat('eng-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0
+    })
+
     const initialSizes = {
         36: 0,
         37: 0,
@@ -49,7 +56,7 @@ const ProductPage = () => {
                         </div>
                         <div className='name-price-container'>
                             <h3 className="product-name">{product.name}</h3>
-                            <h3 className="product-price">${product.price}</h3>
+                            <h3 className="product-price">{formatter.format(product.price)}</h3>
                         </div>
                         <div className='sizes-container'>
                             <section className='title-container'>

@@ -13,7 +13,6 @@ const Searcher = ({ elements, setFiltered, busqueda, setBusqueda, products, invo
         } else {
             filtrarUsers(e.target.value)
         }
-        //elements == products ? filtrarProducts(e.target.value) : filtrarUsers(e.target.value)
     }
 
     const filtrarProducts = (terminoBusqueda) => {
@@ -52,12 +51,29 @@ const Searcher = ({ elements, setFiltered, busqueda, setBusqueda, products, invo
 
     return (
         <div className='adminProductsSearchInput-container'>
-            <input
-                className='adminProductsSearchInput'
-                value={busqueda}
-                placeholder='Buscar producto por nombre, marca, sexo o disciplina '
-                onChange={handleChange}
-            />
+            {
+                elements == products ?
+                    <input
+                        className='adminProductsSearchInput'
+                        value={busqueda}
+                        placeholder='Buscar producto por nombre, marca, sexo o disciplina '
+                        onChange={handleChange}
+                    />
+                    : elements == invoices ?
+                        <input
+                            className='adminProductsSearchInput'
+                            value={busqueda}
+                            placeholder='Buscar factura por nombre o apellido'
+                            onChange={handleChange}
+                        />
+                        :
+                        <input
+                            className='adminProductsSearchInput'
+                            value={busqueda}
+                            placeholder='Buscar usuario por nombre, apellido o email'
+                            onChange={handleChange}
+                        />
+            }
         </div>
     );
 }
