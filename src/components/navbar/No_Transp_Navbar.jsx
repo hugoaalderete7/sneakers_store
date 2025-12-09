@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import "./No_Transp_Navbar.css";
 import { setLogout } from '../../store/slices/auth/authSlice';
+import { deleteAllCart } from '../../store/slices/cart/cartSlice';
 
 const No_Transp_Navbar = ({ user, setUser }) => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const No_Transp_Navbar = ({ user, setUser }) => {
 
     const handleLogout = () => {
         dispatch(setLogout());
+        dispatch(deleteAllCart());
         localStorage.removeItem("token");
         navigate("/");
     }
